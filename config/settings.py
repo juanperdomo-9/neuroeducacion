@@ -223,3 +223,7 @@ RESEND_API_KEY = os.getenv(
 ADMIN_NOTIFICATIONS_EMAIL = os.getenv(
     'ADMIN_NOTIFICATIONS_EMAIL'
 )
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://neuroeducacion-production.up.railway.app",
+]
