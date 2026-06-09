@@ -1,0 +1,916 @@
+<nav
+    id="navbar"
+    class="
+        fixed
+        top-0
+        left-0
+        z-50
+        w-full
+    "
+>
+
+    <!-- BACKGROUND -->
+
+    <div
+        id="navbar-background"
+        class="
+            bg-[#E93CAC]/20
+            backdrop-blur-2xl
+            border-b
+            border-[#F6D3EA]/20
+            shadow-[0_10px_40px_rgba(233,60,172,0.10)]
+            transition-all
+            duration-500
+            ease-[cubic-bezier(.16,1,.3,1)]
+        "
+    >
+
+        <div
+            class="
+                mx-auto
+                flex
+                max-w-7xl
+                items-center
+                justify-between
+                px-5
+                py-5
+                md:px-8
+            "
+        >
+
+            <!-- LOGO -->
+
+            <a
+                href="/"
+                class="
+                    text-[22px]
+                    font-semibold
+                    tracking-[-0.05em]
+                    text-white
+                    transition-all
+                    duration-300
+                    hover:opacity-80
+                    md:text-[25px]
+                "
+            >
+
+                NeuroEducación
+
+            </a>
+
+            <!-- RIGHT -->
+
+            <div
+                class="
+                    flex
+                    items-center
+                    gap-2
+                    md:gap-3
+                "
+            >
+
+                {% if request.user.is_authenticated %}
+
+                    <!-- DESKTOP BUTTONS -->
+
+                    <div
+                        class="
+                            hidden
+                            items-center
+                            gap-3
+                            md:flex
+                        "
+                    >
+
+                        <!-- ENTRENAMIENTOS -->
+
+                        <a
+                            href="#courses"
+                            class="
+                                group
+                                relative
+                                overflow-hidden
+                                rounded-full
+                                border
+                                border-white/20
+                                bg-white/[0.14]
+                                px-6
+                                py-3
+                                text-sm
+                                font-medium
+                                text-white
+                                backdrop-blur-2xl
+                                transition-all
+                                duration-700
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                will-change-transform
+
+                                before:absolute
+                                before:inset-0
+                                before:rounded-full
+                                before:bg-gradient-to-b
+                                before:from-white/[0.18]
+                                before:to-transparent
+                                before:opacity-0
+                                before:transition-all
+                                before:duration-700
+
+                                hover:-translate-y-[3px]
+                                hover:scale-[1.015]
+                                hover:bg-white/[0.20]
+                                hover:border-white/30
+                                hover:shadow-[0_12px_40px_rgba(255,255,255,0.08)]
+
+                                hover:before:opacity-100
+                            "
+                        >
+
+                            <span class="relative z-10">
+
+                                Ver entrenamientos
+
+                            </span>
+
+                        </a>
+
+                        <!-- RECURSOS -->
+
+                        <a
+                            href="{% url 'recursos_gratuitos' %}"
+                            class="
+                                group
+                                relative
+                                overflow-hidden
+                                rounded-full
+                                border
+                                border-white/20
+                                bg-white/[0.10]
+                                px-6
+                                py-3
+                                text-sm
+                                font-medium
+                                text-white
+                                backdrop-blur-2xl
+                                transition-all
+                                duration-700
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                will-change-transform
+
+                                before:absolute
+                                before:inset-0
+                                before:rounded-full
+                                before:bg-gradient-to-b
+                                before:from-white/[0.18]
+                                before:to-transparent
+                                before:opacity-0
+                                before:transition-all
+                                before:duration-700
+
+                                hover:-translate-y-[3px]
+                                hover:scale-[1.015]
+                                hover:bg-white/[0.18]
+                                hover:border-white/30
+                                hover:shadow-[0_12px_40px_rgba(255,255,255,0.08)]
+
+                                hover:before:opacity-100
+                            "
+                        >
+
+                            <span class="relative z-10">
+
+                                Recursos gratuitos
+
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                    <!-- DESKTOP MENU BUTTON -->
+
+                    <button
+                        id="desktop-menu-button"
+                        class="
+                            group
+                            hidden
+                            md:flex
+                            h-11
+                            w-11
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            border-white/20
+                            bg-white/[0.14]
+                            backdrop-blur-2xl
+                            transition-all
+                            duration-700
+                            ease-[cubic-bezier(.16,1,.3,1)]
+                            will-change-transform
+
+                            hover:scale-[1.06]
+                            hover:rotate-[6deg]
+                            hover:bg-white/[0.22]
+                            hover:border-white/30
+                            hover:shadow-[0_12px_40px_rgba(255,255,255,0.08)]
+                        "
+                    >
+
+                        <!-- ICON -->
+
+                        <div
+                            class="
+                                flex
+                                flex-col
+                                gap-[5px]
+                            "
+                        >
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-white
+                                    transition-all
+                                    duration-300
+                                    group-hover:w-4
+                                "
+                            ></span>
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-white
+                                    transition-all
+                                    duration-300
+                                    group-hover:w-6
+                                "
+                            ></span>
+
+                        </div>
+
+                    </button>
+
+                    <!-- MOBILE MENU BUTTON -->
+
+                    <button
+                        id="mobile-menu-button"
+                        class="
+                            group
+                            flex
+                            md:hidden
+                            h-11
+                            w-11
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            border-white/20
+                            bg-white/[0.14]
+                            backdrop-blur-2xl
+                            transition-all
+                            duration-700
+                            ease-[cubic-bezier(.16,1,.3,1)]
+                            will-change-transform
+
+                            hover:scale-[1.06]
+                            hover:rotate-[6deg]
+                            hover:bg-white/[0.22]
+                            hover:border-white/30
+                            hover:shadow-[0_12px_40px_rgba(255,255,255,0.08)]
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                flex-col
+                                gap-[5px]
+                            "
+                        >
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-white
+                                    transition-all
+                                    duration-300
+                                "
+                            ></span>
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-white
+                                    transition-all
+                                    duration-300
+                                "
+                            ></span>
+
+                        </div>
+
+                    </button>
+
+                {% else %}
+
+                    <!-- DESKTOP AUTH -->
+
+                    <div
+                        class="
+                            hidden
+                            items-center
+                            gap-3
+                            md:flex
+                        "
+                    >
+
+                        <!-- LOGIN -->
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="
+                                rounded-full
+                                border
+                                border-white/20
+                                bg-white/[0.14]
+                                px-6
+                                py-3
+                                text-sm
+                                font-medium
+                                text-white
+                                backdrop-blur-2xl
+                                transition-all
+                                duration-700
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                will-change-transform
+
+                                hover:-translate-y-[3px]
+                                hover:scale-[1.015]
+                                hover:bg-white/[0.22]
+                                hover:shadow-[0_14px_40px_rgba(255,255,255,0.06)]
+                            "
+                        >
+
+                            Ingresar
+
+                        </a>
+
+                        <!-- REGISTER -->
+
+                        <a
+                            href="{% url 'register' %}"
+                            class="
+                                rounded-full
+                                bg-white
+                                px-6
+                                py-3
+                                text-sm
+                                font-medium
+                                text-black
+                                transition-all
+                                duration-700
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                will-change-transform
+
+                                hover:-translate-y-[3px]
+                                hover:scale-[1.015]
+                                hover:bg-[#56358A]
+                                hover:shadow-[0_20px_70px_rgba(67,33,107,0.28)]
+                            "
+                        >
+
+                            Crear cuenta
+
+                        </a>
+
+                    </div>
+
+                    <!-- MOBILE BUTTON -->
+
+                    <button
+                        id="mobile-menu-button"
+                        class="
+                            flex
+                            md:hidden
+                            h-11
+                            w-11
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            border-white/20
+                            bg-white/[0.14]
+                            backdrop-blur-2xl
+                            transition-all
+                            duration-700
+                            ease-[cubic-bezier(.16,1,.3,1)]
+
+                            hover:scale-[1.06]
+                            hover:bg-white/[0.22]
+                            hover:shadow-[0_14px_40px_rgba(255,255,255,0.06)]
+                        "
+                    >
+
+                        <div
+                            class="
+                                flex
+                                flex-col
+                                gap-[5px]
+                            "
+                        >
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-black
+                                "
+                            ></span>
+
+                            <span
+                                class="
+                                    h-[2px]
+                                    w-5
+                                    rounded-full
+                                    bg-black
+                                "
+                            ></span>
+
+                        </div>
+
+                    </button>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- DESKTOP DROPDOWN -->
+
+        {% if request.user.is_authenticated %}
+
+        <div
+            id="desktop-menu"
+            class="
+                pointer-events-none
+                absolute
+                right-8
+                top-[88px]
+                w-[340px]
+                rounded-[32px]
+                border
+                border-white/[0.08]
+                bg-transparent
+                p-4
+                opacity-0
+                backdrop-blur-3xl
+                transition-all
+                duration-500
+                ease-[cubic-bezier(.16,1,.3,1)]
+                translate-y-2
+                shadow-[0_30px_100px_rgba(0,0,0,0.28)]
+                md:block
+            "
+        >
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-[24px]
+                    border
+                    border-white/[0.08]
+                    bg-black/55
+                    p-5
+                    shadow-[0_30px_80px_rgba(0,0,0,0.24)]
+                    backdrop-blur-3xl
+                "
+            >
+
+                <div
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                    "
+                >
+
+                    <div
+                        class="
+                            flex
+                            h-12
+                            w-12
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-white
+                            text-sm
+                            font-semibold
+                            text-black
+                            shadow-[0_10px_30px_rgba(255,255,255,0.08)]
+                        "
+                    >
+
+                        {{ request.user.username|slice:":1"|upper }}
+
+                    </div>
+
+                    <div>
+
+                        <p
+                            class="
+                                text-sm
+                                font-semibold
+                                text-white
+                            "
+                        >
+
+                            {{ request.user.username }}
+
+                        </p>
+
+                        <p
+                            class="
+                                mt-1
+                                text-xs
+                                text-zinc-300
+                            "
+                        >
+
+                            Cuenta activa
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="
+                        rounded-full
+                        bg-white
+                        px-4
+                        py-2.5
+                        text-xs
+                        font-medium
+                        text-black
+                        transition-all
+                        duration-300
+                        hover:bg-zinc-200
+                    "
+                >
+
+                    Cerrar sesión
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+        <!-- MOBILE DROPDOWN -->
+
+<div
+    id="mobile-menu"
+    class="
+        pointer-events-none
+        absolute
+        right-5
+        top-[88px]
+        w-[320px]
+        rounded-[32px]
+        border
+        border-white/[0.08]
+        bg-transparent
+        p-5
+        opacity-0
+        backdrop-blur-3xl
+        transition-all
+        duration-500
+        ease-[cubic-bezier(.16,1,.3,1)]
+        translate-y-2
+        shadow-[0_30px_100px_rgba(0,0,0,0.28)]
+        md:hidden
+    "
+>
+
+    {% if request.user.is_authenticated %}
+
+        <!-- USER CARD -->
+
+        <div
+            class="
+                rounded-[24px]
+                border
+                border-white/[0.08]
+                bg-black/55
+                p-5
+                shadow-[0_30px_80px_rgba(0,0,0,0.24)]
+                backdrop-blur-3xl
+            "
+        >
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                "
+            >
+
+                <div
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                    "
+                >
+
+                    <div
+                        class="
+                            flex
+                            h-12
+                            w-12
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-white
+                            text-sm
+                            font-semibold
+                            text-black
+                            shadow-[0_10px_30px_rgba(255,255,255,0.08)]
+                        "
+                    >
+
+                        {{ request.user.username|slice:":1"|upper }}
+
+                    </div>
+
+                    <div>
+
+                        <p
+                            class="
+                                text-sm
+                                font-semibold
+                                text-white
+                            "
+                        >
+
+                            {{ request.user.username }}
+
+                        </p>
+
+                        <p
+                            class="
+                                mt-1
+                                text-xs
+                                text-zinc-300
+                            "
+                        >
+
+                            Cuenta activa
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="
+                        rounded-full
+                        bg-white
+                        px-4
+                        py-2
+                        text-xs
+                        font-medium
+                        text-black
+                        transition-all
+                        duration-300
+                        hover:bg-zinc-200
+                    "
+                >
+
+                    Cerrar sesión
+
+                </a>
+
+            </div>
+
+        </div>
+
+       <!-- MOBILE NAV -->
+
+        <div
+            class="
+                mt-4
+                flex
+                flex-col
+                gap-3
+            "
+        >
+
+            <a
+                href="#courses"
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-[20px]
+                    border
+                    border-white/[0.08]
+                    bg-black/55
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-white
+                    backdrop-blur-3xl
+                    transition-all
+                    duration-500
+                    ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:bg-black/70
+                "
+            >
+
+                <span>
+
+                    Ver entrenamientos
+
+                </span>
+
+                <span>
+
+                    →
+
+                </span>
+
+            </a>
+
+            <a
+                href="{% url 'recursos_gratuitos' %}"
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-[20px]
+                    border
+                    border-white/[0.08]
+                    bg-black/55
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-white
+                    backdrop-blur-3xl
+                    transition-all
+                    duration-500
+                    ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:bg-black/70
+                "
+            >
+
+                <span>
+
+                    Recursos gratuitos
+
+                </span>
+
+                <span>
+
+                    →
+
+                </span>
+
+            </a>
+
+        </div>
+
+    {% else %}
+
+
+        <!-- MOBILE GUEST -->
+
+        <div
+            class="
+                flex
+                flex-col
+                gap-3
+            "
+        >
+
+            <a
+                href="{% url 'login' %}"
+                class="
+                    flex
+                    items-center
+                    justify-center
+                    rounded-[20px]
+                    border
+                    border-white/[0.08]
+                    bg-black/55
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-white
+                    backdrop-blur-3xl
+                    transition-all
+                    duration-500
+                    ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:bg-black/70
+                "
+            >
+
+                Ingresar
+
+            </a>
+
+            <a
+                href="{% url 'register' %}"
+                class="
+                    flex
+                    items-center
+                    justify-center
+                    rounded-[20px]
+                    bg-white
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-black
+                    transition-all
+                    duration-500
+                    ease-[cubic-bezier(.16,1,.3,1)]
+                    hover:bg-zinc-200
+                "
+            >
+
+                Crear cuenta
+
+            </a>
+
+        </div>
+
+    {% endif %}
+
+
+</div>
+
+</nav>
+
+<script>
+
+const desktopMenuButton = document.getElementById('desktop-menu-button');
+const desktopMenu = document.getElementById('desktop-menu');
+
+const mobileMenuButton = document.querySelectorAll('#mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+
+/* DESKTOP MENU */
+
+if (desktopMenuButton && desktopMenu) {
+
+    desktopMenuButton.addEventListener('click', () => {
+
+        desktopMenu.classList.toggle('opacity-0');
+        desktopMenu.classList.toggle('pointer-events-none');
+        desktopMenu.classList.toggle('translate-y-2');
+
+    });
+
+}
+
+/* MOBILE MENU */
+
+if (mobileMenu && mobileMenuButton.length > 0) {
+
+    mobileMenuButton.forEach(button => {
+
+        button.addEventListener('click', () => {
+
+            mobileMenu.classList.toggle('opacity-0');
+            mobileMenu.classList.toggle('pointer-events-none');
+            mobileMenu.classList.toggle('translate-y-2');
+
+        });
+
+    });
+
+}
+
+</script>

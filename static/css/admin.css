@@ -1,0 +1,117 @@
+/* GLOBAL */
+
+body {
+
+    font-family: 'Inter', sans-serif !important;
+
+}
+
+/* HEADER */
+
+.main-header.navbar {
+
+    background: linear-gradient(135deg,
+            #4B2E83,
+            #E93CAC) !important;
+
+    border: none !important;
+
+}
+
+/* SIDEBAR */
+
+.main-sidebar {
+
+    background: #ffffff !important;
+
+    border-right: 1px solid rgba(75, 46, 131, 0.08);
+
+}
+
+/* BRAND */
+
+.brand-link {
+
+    border-bottom: 1px solid rgba(75, 46, 131, 0.08) !important;
+
+}
+
+/* TEXT */
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link {
+
+    color: #4B2E83 !important;
+
+    border-radius: 14px;
+
+    margin: 4px 10px;
+
+    transition: all .3s ease;
+
+}
+
+/* HOVER */
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link:hover {
+
+    background: rgba(233, 60, 172, 0.08) !important;
+
+    color: #E93CAC !important;
+
+}
+
+/* ACTIVE */
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+
+    background: linear-gradient(135deg,
+            #4B2E83,
+            #E93CAC) !important;
+
+    color: white !important;
+
+    box-shadow:
+        0 10px 30px rgba(233, 60, 172, 0.18);
+
+}
+
+/* CARDS */
+
+.card {
+
+    border-radius: 24px !important;
+
+    border: 1px solid rgba(75, 46, 131, 0.08) !important;
+
+    box-shadow:
+        0 20px 60px rgba(75, 46, 131, 0.06) !important;
+
+}
+
+/* BUTTONS */
+
+.btn-primary {
+
+    background: #4B2E83 !important;
+
+    border: none !important;
+
+    border-radius: 14px !important;
+
+}
+
+.btn-primary:hover {
+
+    background: #E93CAC !important;
+
+}
+
+/* TABLES */
+
+.table {
+
+    border-radius: 18px !important;
+
+    overflow: hidden;
+
+}

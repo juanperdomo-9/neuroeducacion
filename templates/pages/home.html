@@ -1,0 +1,767 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section
+    class="
+        relative
+        flex
+        min-h-screen
+        items-center
+        justify-center
+        overflow-hidden
+        px-6
+        pt-32
+        pb-20
+    "
+>
+
+    <!-- BACKGROUND -->
+
+    <div
+        class="
+            absolute
+            inset-0
+        "
+    >
+
+        <!-- IMAGE -->
+
+        <img
+            src="{% static 'images/fondoM.jpeg' %}"
+            class="
+                h-full
+                w-full
+                object-cover
+            "
+        >
+
+        <!-- OVERLAY -->
+
+        <div
+            class="
+                absolute
+                inset-0
+                bg-black/35
+            "
+        ></div>
+
+        <!-- SOFT GRADIENT -->
+
+        <div
+            class="
+                absolute
+                inset-0
+                bg-gradient-to-b
+                from-[#FCFAFD]/10
+                via-transparent
+                to-[#FCFAFD]/30
+            "
+        ></div>
+
+    </div>
+
+    <!-- CONTENT -->
+
+    <div
+        class="
+            relative
+            z-10
+            mx-auto
+            flex
+            max-w-6xl
+            flex-col
+            items-center
+            text-center
+        "
+    >
+
+        <!-- BRAND -->
+
+        <p
+            class="
+                mb-10
+                text-center
+                font-black
+                uppercase
+                text-white
+            "
+
+            style="
+                font-size: clamp(1rem, 6vw, 8rem);
+                line-height: 0.9;
+                letter-spacing: -0.08em;
+                text-shadow: 0 15px 60px rgba(0,0,0,0.55);
+            "
+        >
+
+            NeuroEducación Aplicada
+
+        </p>
+
+        <!-- AUTHOR -->
+
+        <p
+            class="
+                mb-16
+                text-sm
+                text-white/80
+            "
+        >
+
+            por Lic. Prof. Mariana Chua
+
+        </p>
+
+        <!-- TITLE -->
+
+        <h1
+            class="
+                max-w-5xl
+                text-[1.5rem]
+                font-semibold
+                leading-[1.1]
+                tracking-[-0.05em]
+                text-white
+                drop-shadow-[0_10px_40px_rgba(0,0,0,0.45)]
+                md:text-[4rem]
+            "
+        >
+
+            Neuroeducación aplicada
+            a la vida real escolar
+            y familiar
+
+        </h1>
+
+        <!-- SUBTEXT -->
+
+        <p
+            class="
+                mt-10
+                max-w-4xl
+                text-[1.1rem]
+                leading-[1.9]
+                text-white/90
+                md:text-[1.25rem]
+            "
+        >
+
+            Herramientas, entrenamientos y acompañamiento
+            para transformar vínculos, convivencia y aprendizaje
+            desde una mirada humana y neuroeducativa.
+
+        </p>
+
+    </div>
+
+</section>
+<!-- SEARCH -->
+
+<section
+    id="search-section"
+    class="
+        relative
+        z-30
+        -mt-28
+        px-5
+        md:-mt-26
+    "
+>
+
+    <div
+        class="
+            mx-auto
+            max-w-3xl
+        "
+    >
+
+        <form
+            id="search-form"
+            method="GET"
+            class="
+                relative
+                overflow-hidden
+                rounded-[24px]
+                border
+                border-[#4B2E83]/10
+                bg-white/90
+                shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+                backdrop-blur-2xl
+                transition-all
+                duration-500
+                focus-within:border-white/20
+            "
+        >
+
+            <!-- ICON -->
+
+            <div
+                class="
+                    pointer-events-none
+                    absolute
+                    left-5
+                    top-[54%]
+                    z-20
+                    -translate-y-[54%]
+                "
+            >
+
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="
+                        h-5
+                        w-5
+                        text-zinc-500
+                    "
+                >
+
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="m21 21-4.35-4.35m0 0A7.5 7.5 0 1 0 6 6a7.5 7.5 0 0 0 10.65 10.65Z"
+                    />
+
+                </svg>
+
+            </div>
+
+            <!-- INPUT -->
+
+            <input
+                id="search-input"
+                type="text"
+                name="q"
+                autocomplete="off"
+                placeholder="Buscar cursos..."
+                value="{{ query|default:'' }}"
+                class="
+                    h-16
+                    w-full
+                    border-0
+                    bg-transparent
+                    px-14
+                    pr-32
+                    text-sm
+                    text-[#4B2E83]
+                    outline-none
+                    transition-all
+                    duration-300
+                    placeholder:text-[#6B5A8E]/60
+                    md:text-base
+                "
+            >
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="
+                    absolute
+                    right-3
+                    top-[54%]
+                    inline-flex
+                    -translate-y-[54%]
+                    items-center
+                    justify-center
+                    rounded-full
+                    bg-[#4B2E83]
+                    px-5
+                    py-2.5
+                    text-sm
+                    font-medium
+                    text-white
+                    transition-all
+                    duration-300
+                    hover:scale-[1.03]
+                    active:scale-[0.98]
+                    hover:bg-[#E93CAC]
+                "
+            >
+
+                Buscar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- COURSES -->
+
+<section
+    id="courses"
+    class="
+        bg-[#FCFAFD]
+        px-5
+        pt-32
+        pb-24
+        md:px-8
+        md:py-32
+    "
+>
+
+    <div
+        class="
+            mx-auto
+            max-w-7xl
+        "
+    >
+
+        <!-- HEADER -->
+
+        <div
+            class="
+                mb-16
+                flex
+                flex-col
+                gap-6
+                md:mb-20
+                md:flex-row
+                md:items-end
+                md:justify-between
+            "
+        >
+
+            <div>
+
+                <p
+                    class="
+                        mb-3
+                        text-xs
+                        uppercase
+                        tracking-[0.25em]
+                        text-[#6B5A8E]
+                        md:text-sm
+                    "
+                >
+
+                    Cursos
+
+                </p>
+
+                <h2
+                    class="
+                        max-w-3xl
+                        text-4xl
+                        font-semibold
+                        leading-[1]
+                        tracking-[-0.04em]
+                        text-[#4B2E83]
+                        md:text-6xl
+                    "
+                >
+
+                    Explorá nuestros
+                    cursos premium.
+
+                </h2>
+
+            </div>
+
+            <p
+                class="
+                    max-w-md
+                    text-sm
+                    leading-relaxed
+                    text-[#6B5A8E]
+                    md:text-base
+                "
+            >
+
+                Formación diseñada para ayudarte
+                a desarrollar habilidades modernas
+                con una experiencia premium.
+
+            </p>
+
+        </div>
+
+        <!-- GRID -->
+
+        <div
+            class="
+                grid
+                grid-cols-1
+                gap-8
+                md:grid-cols-2
+                lg:grid-cols-3
+                lg:gap-10
+            "
+        >
+
+            {% for course in courses %}
+
+                <a
+                    href="{% url 'course_detail' course.slug %}"
+                    class="
+                        reveal-card
+                        course-card
+                        group
+                        transform-gpu
+                        relative
+                        overflow-hidden
+                        rounded-[28px]
+                        border
+                        border-[#4B2E83]/10
+                        bg-white
+                        transition-all
+                        duration-500
+                        ease-out
+                        hover:-translate-y-3
+                        hover:scale-[1.015]
+                        active:scale-[0.98]
+                        active:translate-y-1
+                        hover:border-[#E93CAC]/20
+                        hover:shadow-[0_30px_80px_rgba(233,60,172,0.18)]
+                        active:shadow-[0_20px_40px_rgba(233,60,172,0.12)]
+                    "
+                >
+
+                    <!-- LIGHT EFFECT -->
+
+                    <div
+                        class="
+                            pointer-events-none
+                            absolute
+                            inset-0
+                            opacity-0
+                            transition-opacity
+                            duration-500
+                            group-hover:opacity-100
+                            bg-white/[0.02]
+                        "
+                    ></div>
+
+                    <!-- IMAGE -->
+
+                    <div
+                        class="
+                            aspect-video
+                            overflow-hidden
+                        "
+                    >
+
+                        <img
+                            src="{{ course.thumbnail.url }}"
+                            class="
+                                h-full
+                                w-full
+                                object-cover
+                                transition-all
+                                duration-700
+                                group-hover:scale-[1.06]
+                                group-active:scale-[1.03]
+                                transition-transform
+                                duration-[1600ms]
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                            "
+                            alt="{{ course.title }}"
+                        >
+
+                    </div>
+
+                    <!-- CONTENT -->
+
+                    <div class="relative z-20 p-7">
+
+                        <h3
+                            class="
+                                mb-4
+                                text-2xl
+                                font-semibold
+                                tracking-[-0.03em]
+                                text-[#4B2E83]
+                                transition-colors
+                                duration-300
+                                group-hover:text-[#E93CAC]
+                            "
+                        >
+
+                            {{ course.title }}
+
+                        </h3>
+
+                        <p
+                            class="
+                                mb-8
+                                text-sm
+                                leading-relaxed
+                                text-[#6B5A8E]
+                                md:text-base
+                            "
+                        >
+
+                            {{ course.short_description }}
+
+                        </p>
+
+                        <div
+                            class="
+                                flex
+                                items-center
+                                justify-between
+                            "
+                        >
+
+                            <span
+                                class="
+                                    text-lg
+                                    font-semibold
+                                    text-[#4B2E83]
+                                    md:text-xl
+                                "
+                            >
+
+                                ${{ course.price }}
+
+                            </span>
+
+                            <span
+                                class="
+                                    inline-flex
+                                    items-center
+                                    gap-2
+                                    text-sm
+                                    text-zinc-500
+                                    transition-all
+                                    duration-300
+                                    group-hover:gap-3
+                                    group-hover:text-[#E93CAC]
+                                "
+                            >
+
+                                Ver curso
+
+                                <span
+                                    class="
+                                        transition-transform
+                                        duration-300
+                                        group-hover:translate-x-1
+                                    "
+                                >
+                                    →
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            {% endfor %}
+
+            {% for course in courses %}
+
+                <!-- CARD -->
+
+            {% empty %}
+
+                <div
+                    class="
+                        col-span-full
+                        overflow-hidden
+                        rounded-[32px]
+                        border
+                        border-white/10
+                        bg-white/[0.03]
+                        px-8
+                        py-16
+                        text-center
+                        hover:-translate-y-3
+                        hover:scale-[1.015]
+                        transition-all
+                        duration-700
+                        ease-[cubic-bezier(.16,1,.3,1)]
+                    "
+                >
+
+                    <div
+                        class="
+                            mx-auto
+                            mb-5
+                            flex
+                            h-16
+                            w-16
+                            items-center
+                            justify-center
+                            rounded-full
+                            border
+                            border-white/10
+                            bg-white/[0.03]
+                        "
+                    >
+
+                        🔍
+
+                    </div>
+
+                    <h3
+                        class="
+                            mb-3
+                            text-2xl
+                            font-semibold
+                            text-[#4B2E83]+pí90
+                        "
+                    >
+
+                        No encontramos cursos
+
+                    </h3>
+
+                    <p
+                        class="
+                            mx-auto
+                            max-w-md
+                            text-zinc-400
+                        "
+                    >
+
+                        Probá buscando otra tecnología,
+                        categoría o palabra clave.
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ANIMATIONS -->
+
+<style>
+
+.fade-up,
+.fade-up-delay-1,
+.fade-up-delay-2,
+.fade-up-delay-3 {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.fade-up-delay-1 {
+    animation-delay: .15s;
+}
+
+.fade-up-delay-2 {
+    animation-delay: .3s;
+}
+
+.fade-up-delay-3 {
+    animation-delay: .45s;
+}
+
+@keyframes fadeUp {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* COURSE CARDS */
+
+.reveal-card {
+    opacity: 0;
+    transform: translateY(40px) scale(.98);
+    transition:
+        opacity 1s cubic-bezier(.16,1,.3,1),
+        transform 1s cubic-bezier(.16,1,.3,1);
+    will-change: transform, opacity;
+}
+
+.reveal-card.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.course-card {
+    will-change: transform;
+}
+
+</style>
+<script>
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const cards = document.querySelectorAll('.reveal-card');
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach((entry) => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add('active');
+
+            }
+
+        });
+
+    }, {
+        threshold: 0.15
+    });
+
+    cards.forEach((card, index) => {
+
+        card.style.transitionDelay = `${index * 120}ms`;
+
+        observer.observe(card);
+
+    });
+
+});
+
+
+
+    window.addEventListener(
+        'load',
+        () => {
+
+            const params = new URLSearchParams(
+                window.location.search
+            )
+
+            const query = params.get('q')
+
+            if (query) {
+
+                const searchSection = document.getElementById(
+                    'search-section'
+                )
+
+                searchSection.scrollIntoView({
+
+                    behavior: 'smooth',
+                    block: 'center'
+
+                })
+
+            }
+
+        }
+    )
+
+</script>
+{% endblock %}

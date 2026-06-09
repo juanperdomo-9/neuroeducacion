@@ -1,0 +1,967 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ course.title }}
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+
+<section
+    class="
+        relative
+        overflow-hidden
+        px-5
+        pb-20
+        pt-28
+        md:px-8
+        md:pb-28
+        md:pt-40
+    "
+>
+
+    <!-- BACKGROUND -->
+
+    <div
+        class="
+            absolute
+            inset-0
+            -z-10
+            overflow-hidden
+        "
+    >
+
+        <img
+            src="{{ course.thumbnail.url }}"
+            class="
+                h-full
+                w-full
+                object-cover
+                opacity-10
+                blur-3xl
+                scale-110
+            "
+        >
+
+        <div
+            class="
+                absolute
+                inset-0
+                bg-[#FCFAFD]/92
+            "
+        ></div>
+
+    </div>
+
+    <!-- AMBIENT LIGHT -->
+
+    <div
+        class="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-0
+            h-[500px]
+            w-[500px]
+            -translate-x-1/2
+            rounded-full
+            bg-[#E93CAC]/15
+            blur-3xl
+        "
+    ></div>
+
+    <div
+        class="
+            mx-auto
+            grid
+            max-w-7xl
+            items-start
+            gap-14
+            lg:grid-cols-[1fr_520px]
+        "
+    >
+
+        <!-- LEFT -->
+
+        <div class="hero-content">
+
+            <!-- BADGE -->
+
+            <div
+                class="
+                    mb-6
+                    inline-flex
+                    items-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-[#4B2E83]/10
+                    bg-white
+                    px-4
+                    py-2
+                    text-xs
+                    text-[#6B5A8E]
+                    shadow-[0_10px_40px_rgba(233,60,172,0.08)]
+                    backdrop-blur-xl
+                    md:text-sm
+                "
+            >
+
+                <span class="h-2 w-2 rounded-full bg-[#E93CAC]"></span>
+
+                Acceso inmediato
+
+            </div>
+
+            <!-- TITLE -->
+
+            <h1
+                class="
+                    mb-6
+                    max-w-4xl
+                    text-4xl
+                    font-semibold
+                    leading-[0.95]
+                    tracking-[-0.05em]
+                    text-[#4B2E83]
+                    sm:text-5xl
+                    md:text-6xl
+                    lg:text-7xl
+                "
+            >
+
+                {{ course.title }}
+
+            </h1>
+
+            <!-- DESCRIPTION -->
+
+            <p
+                class="
+                    mb-10
+                    max-w-2xl
+                    text-base
+                    leading-relaxed
+                    text-[#6B5A8E]
+                    md:text-lg
+                "
+            >
+
+                {{ course.short_description }}
+
+            </p>
+
+            <!-- STATS -->
+
+            <div
+                class="
+                    mb-10
+                    flex
+                    flex-wrap
+                    gap-8
+                    md:gap-12
+                "
+            >
+
+                <div>
+
+                    <p
+                        class="
+                            mb-2
+                            text-[11px]
+                            uppercase
+                            tracking-[0.25em]
+                            text-[#6B5A8E]/70
+                        "
+                    >
+
+                        Clases
+
+                    </p>
+
+                    <p
+                        class="
+                            text-xl
+                            font-semibold
+                            tracking-[-0.03em]
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        {{ lessons_count }}
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <p
+                        class="
+                            mb-2
+                            text-[11px]
+                            uppercase
+                            tracking-[0.25em]
+                            text-zinc-500
+                        "
+                    >
+
+                        Acceso
+
+                    </p>
+
+                    <p
+                        class="
+                            text-xl
+                            font-semibold
+                            tracking-[-0.03em]
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        Sin límite
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <p
+                        class="
+                            mb-2
+                            text-[11px]
+                            uppercase
+                            tracking-[0.25em]
+                            text-zinc-500
+                        "
+                    >
+
+                        Modalidad
+
+                    </p>
+
+                    <p
+                        class="
+                            text-xl
+                            font-semibold
+                            tracking-[-0.03em]
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        Online
+
+                    </p>
+
+                </div>
+
+            </div>
+            {% if course.is_free and course.resource_file %}
+
+                <div
+                    class="
+                        reveal
+                        mb-8
+                        flex
+                        items-center
+                        gap-4
+                        rounded-[28px]
+                        border
+                        border-[#4B2E83]/10
+                        bg-white
+                        p-4
+                        shadow-[0_10px_40px_rgba(233,60,172,0.08)]
+                    "
+                >
+
+                    <!-- FILE ICON -->
+
+                    <div
+                        class="
+                            flex
+                            h-16
+                            w-16
+                            shrink-0
+                            items-center
+                            justify-center
+                            rounded-2xl
+                            bg-[#E93CAC]/10
+                            text-2xl
+                        "
+                    >
+
+                        📄
+
+                    </div>
+
+                    <!-- INFO -->
+
+                    <div class="flex-1">
+
+                        <p
+                            class="
+                                text-lg
+                                font-semibold
+                                tracking-[-0.03em]
+                                text-[#4B2E83]
+                            "
+                        >
+
+                            Recurso descargable
+
+                        </p>
+
+                        <p
+                            class="
+                                mt-1
+                                text-sm
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            Descargá el material gratuito
+                            desde el botón inferior.
+
+                        </p>
+
+                    </div>
+
+                    <!-- MINI PREVIEW -->
+
+                    <div
+                        class="
+                            hidden
+                            overflow-hidden
+                            rounded-2xl
+                            border
+                            border-[#4B2E83]/10
+                            md:block
+                        "
+                    >
+
+                        <img
+                            src="{{ course.thumbnail.url }}"
+                            class="
+                                h-20
+                                w-32
+                                object-cover
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <!-- CTA -->
+
+            <div
+                class="
+                    flex
+                    flex-col
+                    items-start
+                    gap-5
+                    sm:flex-row
+                    sm:items-center
+                "
+            >
+
+                {% if course.is_free %}
+
+                    {% if course.resource_file %}
+
+                        <a
+                            href="{{ course.resource_file.url }}"
+                            download
+                            class="
+                                inline-flex
+                                items-center
+                                justify-center
+                                rounded-full
+                                bg-[#4B2E83]
+                                px-7
+                                py-4
+                                text-sm
+                                font-medium
+                                text-white
+                                transition-all
+                                duration-500
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                hover:scale-[1.02]
+                                hover:bg-[#E93CAC]
+                                hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                                active:scale-[0.98]
+                            "
+                        >
+
+                            Descargar recurso
+
+                        </a>
+
+                    {% endif %}
+
+                {% else %}
+
+                    {% if request.user.is_authenticated %}
+
+                        {% if has_access %}
+
+                            <a
+                                href="{% url 'lesson_detail' modules.first.lessons.first.id %}"
+                                class="
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    px-7
+                                    py-4
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                    transition-all
+                                    duration-500
+                                    ease-[cubic-bezier(.16,1,.3,1)]
+                                    hover:scale-[1.02]
+                                    hover:bg-[#E93CAC]
+                                    hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                                    active:scale-[0.98]
+                                "
+                            >
+
+                                Ver contenido
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'checkout' course.slug %}"
+                                class="
+                                    inline-flex
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    px-7
+                                    py-4
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                    transition-all
+                                    duration-500
+                                    ease-[cubic-bezier(.16,1,.3,1)]
+                                    hover:scale-[1.02]
+                                    hover:bg-[#E93CAC]
+                                    hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                                    active:scale-[0.98]
+                                "
+                            >
+
+                                Comprar acceso
+
+                            </a>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <a
+                            href="{% url 'login' %}"
+                            class="
+                                inline-flex
+                                items-center
+                                justify-center
+                                rounded-full
+                                bg-[#4B2E83]
+                                px-7
+                                py-4
+                                text-sm
+                                font-medium
+                                text-white
+                                transition-all
+                                duration-500
+                                ease-[cubic-bezier(.16,1,.3,1)]
+                                hover:scale-[1.02]
+                                hover:bg-[#E93CAC]
+                                hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                                active:scale-[0.98]
+                            "
+                        >
+
+                            Iniciar sesión para comprar
+
+                        </a>
+
+                    {% endif %}
+
+                {% endif %}
+
+                {% if has_access %}
+
+                    <p
+                        class="
+                            text-sm
+                            font-medium
+                            text-emerald-400
+                        "
+                    >
+
+                        ✓ Acceso desbloqueado
+
+                    </p>
+
+                {% elif course.is_free %}
+
+                    <p
+                        class="
+                            text-sm
+                            font-medium
+                            uppercase
+                            tracking-[0.2em]
+                            text-[#E93CAC]
+                        "
+                    >
+
+                        Recurso gratuito
+
+                    </p>
+
+                {% else %}
+
+                    <p
+                        class="
+                            text-3xl
+                            font-semibold
+                            tracking-[-0.04em]
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        ${{ course.price }}
+
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+        <!-- RIGHT -->
+
+        <div
+            class="
+                preview-card
+                order-first
+                mb-10
+                flex
+                items-start
+                justify-center
+                lg:order-none
+                lg:mb-0
+                lg:justify-end
+                lg:pt-20
+            "
+        >
+
+            <div
+                class="
+                    group
+                    w-full
+                    max-w-[520px]
+                    overflow-hidden
+                    rounded-[32px]
+                    border
+                    border-[#4B2E83]/10
+                    bg-white
+                    shadow-[0_30px_80px_rgba(233,60,172,0.12)]
+                    backdrop-blur-xl
+                "
+            >
+
+                <img
+                    src="{{ course.thumbnail.url }}"
+                    class="
+                        aspect-[16/9]
+                        h-full
+                        w-full
+                        object-cover
+                        object-center
+                        transition-transform
+                        duration-[1600ms]
+                        ease-[cubic-bezier(.16,1,.3,1)]
+                        group-hover:scale-[1.03]
+                    "
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTENT -->
+
+<section
+    class="
+        relative
+        overflow-hidden
+        bg-gradient-to-br
+        from-white
+        via-[#FFF7FC]
+        to-[#FCEEFF]
+        px-5
+        pb-24
+        md:px-8
+        md:pb-32
+    "
+>
+
+    <!-- AMBIENT LIGHT -->
+
+    <div
+        class="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-0
+            h-[400px]
+            w-[400px]
+            -translate-x-1/2
+            rounded-full
+            bg-[#E93CAC]/10
+            blur-3xl
+        "
+    ></div>
+
+    <div
+        class="
+            relative
+            z-10
+            mx-auto
+            max-w-7xl
+        "
+    >
+
+        <!-- TITLE -->
+
+        <div class="reveal mb-12 md:mb-16">
+
+            <p
+                class="
+                    mb-3
+                    text-xs
+                    uppercase
+                    tracking-[0.3em]
+                    text-zinc-500
+                    md:text-sm
+                "
+            >
+
+            </p>
+
+            <h2
+                class="
+                    max-w-3xl
+                    text-3xl
+                    font-semibold
+                    leading-[1]
+                    tracking-[-0.04em]
+                    text-[#4B2E83]
+                    md:text-5xl
+                "
+            >
+
+                Todo lo que incluye
+                este curso.
+
+            </h2>
+
+        </div>
+
+        <!-- MODULES -->
+
+        <div class="space-y-5">
+
+            {% for module in modules %}
+
+                <div
+                    class="
+                        module-card
+                        reveal
+                        overflow-hidden
+                        rounded-[28px]
+                        border
+                        border-[#4B2E83]/10
+                        bg-white
+                        transition-all
+                        duration-500
+                        hover:border-[#E93CAC]/20
+                        hover:shadow-[0_20px_60px_rgba(233,60,172,0.10)]
+                    "
+                >
+
+                    <!-- MODULE HEADER -->
+
+                    <div
+                        class="
+                            flex
+                            flex-col
+                            gap-3
+                            px-6
+                            py-6
+                            md:flex-row
+                            md:items-center
+                            md:justify-between
+                            md:px-8
+                        "
+                    >
+
+                        <h3
+                            class="
+                                text-xl
+                                font-semibold
+                                tracking-[-0.03em]
+                                text-[#4B2E83]
+                                md:text-2xl
+                            "
+                        >
+
+                            {{ module.title }}
+
+                        </h3>
+
+                        <span
+                            class="
+                                text-sm
+                                text-zinc-500
+                            "
+                        >
+
+                            {{ module.lessons.count }} clases
+
+                        </span>
+
+                    </div>
+
+                    <!-- LESSONS -->
+
+                    <div
+                        class="
+                            border-t
+                            border-white/5
+                        "
+                    >
+
+                        {% for lesson in module.lessons.all %}
+
+                        <a
+                            href="{% url 'lesson_detail' lesson.id %}"
+                            class="group/lesson"
+                        >
+
+                            <div
+                                class="
+                                    flex
+                                    items-center
+                                    justify-between
+                                    gap-4
+                                    px-6
+                                    py-5
+                                    transition-all
+                                    duration-300
+                                    hover:bg-white/[0.03]
+                                    md:px-8
+                                "
+                            >
+
+                                <div
+                                    class="
+                                        flex
+                                        min-w-0
+                                        items-center
+                                        gap-4
+                                    "
+                                >
+
+                                    <div
+                                        class="
+                                            flex
+                                            h-11
+                                            w-11
+                                            shrink-0
+                                            items-center
+                                            justify-center
+                                            rounded-full
+                                            border
+                                            border-white/5
+                                            bg-white/[0.03]
+                                            text-sm
+                                            transition-all
+                                            duration-300
+                                            group-hover/lesson:border-white/10
+                                            group-hover/lesson:bg-white/[0.06]
+                                        "
+                                    >
+
+                                        {% if item.id in completed_lessons %}
+
+                                            ✓
+
+                                        {% elif has_access or item.is_preview %}
+
+                                            ▶
+
+                                        {% else %}
+
+                                            🔒
+
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="min-w-0">
+
+                                        <p
+                                            class="
+                                                truncate
+                                                font-medium
+                                                text-[#4B2E83]
+                                                transition-colors
+                                                duration-300
+                                                group-hover/lesson:text-[#E93CAC]
+                                            "
+                                        >
+
+                                            {{ lesson.title }}
+
+                                        </p>
+
+                                        <p
+                                            class="
+                                                mt-1
+                                                text-sm
+                                                text-zinc-500
+                                            "
+                                        >
+
+                                            {{ lesson.duration }}
+
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                                {% if lesson.is_preview %}
+
+                                    <span
+                                        class="
+                                            shrink-0
+                                            rounded-full
+                                            border
+                                            border-emerald-500/20
+                                            bg-emerald-500/10
+                                            px-3
+                                            py-1
+                                            text-xs
+                                            font-medium
+                                            text-emerald-400
+                                        "
+                                    >
+
+                                        Preview
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </a>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<style>
+
+.hero-content {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: revealHero 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.preview-card {
+    opacity: 0;
+    transform: translateY(40px) scale(.98);
+    animation: revealPreview 1.1s cubic-bezier(.16,1,.3,1) forwards;
+    animation-delay: .15s;
+}
+
+.module-card {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: revealModule 1s cubic-bezier(.16,1,.3,1) forwards;
+}
+
+.module-card:nth-child(1) {
+    animation-delay: .1s;
+}
+
+.module-card:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.module-card:nth-child(3) {
+    animation-delay: .3s;
+}
+
+.module-card:nth-child(4) {
+    animation-delay: .4s;
+}
+
+@keyframes revealHero {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes revealPreview {
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+@keyframes revealModule {
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+</style>
+
+{% endblock %}

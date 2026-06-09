@@ -1,0 +1,667 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Transferencia bancaria
+{% endblock %}
+
+{% block content %}
+
+<section
+    class="
+        min-h-screen
+        bg-[#FCFAFD]
+        px-6
+        py-32
+    "
+>
+
+    <div
+        class="
+            mx-auto
+            max-w-5xl
+        "
+    >
+
+        <!-- HEADER -->
+
+        <div
+            class="
+                reveal
+                mb-14
+                max-w-3xl
+            "
+        >
+
+            <p
+                class="
+                    mb-4
+                    text-sm
+                    uppercase
+                    tracking-[0.3em]
+                    text-[#6B5A8E]
+                "
+            >
+
+                Transferencia bancaria
+
+            </p>
+
+            <h1
+                class="
+                    mb-6
+                    text-5xl
+                    font-semibold
+                    tracking-tight
+                    text-[#4B2E83]
+                "
+            >
+
+                Finalizá tu compra
+
+            </h1>
+
+            <p
+                class="
+                    text-lg
+                    leading-relaxed
+                    text-[#6B5A8E]
+                "
+            >
+
+                Realizá la transferencia con los datos
+                indicados debajo y luego enviá el comprobante
+                para validar tu acceso al curso.
+
+            </p>
+
+        </div>
+
+        <!-- GRID -->
+
+        <div
+            class="
+                grid
+                gap-8
+                lg:grid-cols-[1fr_0.9fr]
+            "
+        >
+
+            <!-- LEFT -->
+
+            <div
+                class="
+                    reveal
+                    rounded-[32px]
+                    border
+                    border-[#4B2E83]/10
+                    bg-white
+                    p-8
+                    shadow-[0_30px_80px_rgba(233,60,172,0.10)]
+                "
+            >
+
+                <h2
+                    class="
+                        mb-8
+                        text-2xl
+                        font-semibold
+                        text-[#4B2E83]
+                    "
+                >
+
+                    Datos bancarios
+
+                </h2>
+
+                <div class="space-y-6">
+
+                    <!-- TITULAR -->
+
+                    <div>
+
+                        <p
+                            class="
+                                mb-2
+                                text-sm
+                                uppercase
+                                tracking-[0.2em]
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            Titular
+
+                        </p>
+
+                        <p
+                            class="
+                                text-lg
+                                text-[#4B2E83]
+                            "
+                        >
+
+                            NOMBRE DEL CLIENTE
+
+                        </p>
+
+                    </div>
+
+                    <!-- BANCO -->
+
+                    <div>
+
+                        <p
+                            class="
+                                mb-2
+                                text-sm
+                                uppercase
+                                tracking-[0.2em]
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            Banco
+
+                        </p>
+
+                        <p
+                            class="
+                                text-lg
+                                text-[#4B2E83]
+                            "
+                        >
+
+                            Banco Galicia
+
+                        </p>
+
+                    </div>
+
+                    <!-- ALIAS -->
+
+                    <div>
+
+                        <p
+                            class="
+                                mb-2
+                                text-sm
+                                uppercase
+                                tracking-[0.2em]
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            Alias
+
+                        </p>
+
+                        <div
+                            class="
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                border
+                                border-[#4B2E83]/10
+                                bg-[#FCFAFD]
+                                px-5
+                                py-4
+                            "
+                        >
+
+                            <p
+                                class="
+                                    text-[#4B2E83]
+                                "
+                            >
+
+                                alias.del.cliente
+
+                            </p>
+
+                            <button
+                                type="button"
+                                onclick="copyAlias()"
+                                class="
+                                    text-sm
+                                    text-[#6B5A8E]
+                                    transition
+                                    duration-300
+                                    hover:text-[#E93CAC]
+                                "
+                            >
+
+                                Copiar
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CVU -->
+
+                    <div>
+
+                        <p
+                            class="
+                                mb-2
+                                text-sm
+                                uppercase
+                                tracking-[0.2em]
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            CVU
+
+                        </p>
+
+                        <div
+                            class="
+                                flex
+                                items-center
+                                justify-between
+                                rounded-2xl
+                                border
+                                border-[#4B2E83]/10
+                                bg-[#FCFAFD]
+                                px-5
+                                py-4
+                            "
+                        >
+
+                            <p
+                                class="
+                                    text-[#4B2E83]
+                                "
+                            >
+
+                                0000003100000000000000
+
+                            </p>
+
+                            <button
+                                type="button"
+                                onclick="copyCVU()"
+                                class="
+                                    text-sm
+                                    text-[#6B5A8E]
+                                    transition
+                                    duration-300
+                                    hover:text-[#E93CAC]
+                                "
+                            >
+
+                                Copiar
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- MONTO -->
+
+                    <div>
+
+                        <p
+                            class="
+                                mb-2
+                                text-sm
+                                uppercase
+                                tracking-[0.2em]
+                                text-[#6B5A8E]
+                            "
+                        >
+
+                            Total a transferir
+
+                        </p>
+
+                        <p
+                            class="
+                                text-4xl
+                                font-semibold
+                                tracking-tight
+                                text-[#4B2E83]
+                            "
+                        >
+
+                            ${{ course.price }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+
+            <div
+                class="
+                    flex
+                    flex-col
+                    gap-6
+                "
+            >
+
+                <!-- PASOS -->
+
+                <div
+                    class="
+                        reveal
+                        rounded-[32px]
+                        border
+                        border-[#4B2E83]/10
+                        bg-white
+                        p-8
+                        shadow-[0_30px_80px_rgba(233,60,172,0.10)]
+                    "
+                >
+
+                    <h3
+                        class="
+                            mb-6
+                            text-2xl
+                            font-semibold
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        ¿Cómo continúa?
+
+                    </h3>
+
+                    <div class="space-y-5">
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="
+                                    flex
+                                    h-8
+                                    w-8
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                "
+                            >
+
+                                1
+
+                            </div>
+
+                            <p class="text-[#6B5A8E]">
+
+                                Realizá la transferencia
+                                utilizando los datos bancarios.
+
+                            </p>
+
+                        </div>
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="
+                                    flex
+                                    h-8
+                                    w-8
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                "
+                            >
+
+                                2
+
+                            </div>
+
+                            <p class="text-[#6B5A8E]">
+
+                                Enviá el comprobante por
+                                WhatsApp utilizando el botón
+                                inferior.
+
+                            </p>
+
+                        </div>
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="
+                                    flex
+                                    h-8
+                                    w-8
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                "
+                            >
+
+                                3
+
+                            </div>
+
+                            <p class="text-[#6B5A8E]">
+
+                                Luego presioná el botón
+                                "Ya envié el comprobante".
+
+                            </p>
+
+                        </div>
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="
+                                    flex
+                                    h-8
+                                    w-8
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                "
+                            >
+
+                                4
+
+                            </div>
+
+                            <p class="text-[#6B5A8E]">
+
+                                Se enviará un email confirmando
+                                la recepción del comprobante.
+
+                            </p>
+
+                        </div>
+
+                        <div class="flex gap-4">
+
+                            <div
+                                class="
+                                    flex
+                                    h-8
+                                    w-8
+                                    shrink-0
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]
+                                    text-sm
+                                    font-medium
+                                    text-white
+                                "
+                            >
+
+                                5
+
+                            </div>
+
+                            <p class="text-[#6B5A8E]">
+
+                                El contenido NO será desbloqueado
+                                automáticamente hasta verificar
+                                manualmente la transferencia.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ALERT -->
+
+                <div
+                    class="
+                        reveal
+                        rounded-[32px]
+                        border
+                        border-[#E93CAC]/10
+                        bg-[#E93CAC]/5
+                        p-8
+                        style="transition-delay: .1s;"
+                    "
+                >
+
+                    <p
+                        class="
+                            leading-relaxed
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        El desbloqueo del contenido puede
+                        tardar algunos minutos dependiendo
+                        del horario y la verificación
+                        manual del comprobante.
+
+                    </p>
+
+                </div>
+
+                <!-- WHATSAPP -->
+
+                <a
+                    href="https://wa.me/542214093007"
+                    target="_blank"
+                    class="
+                        reveal
+                        inline-flex
+                        items-center
+                        justify-center
+                        rounded-full
+                        border
+                        border-[#4B2E83]/10
+                        bg-white
+                        px-6
+                        py-5
+                        text-sm
+                        font-medium
+                        text-[#4B2E83]
+                        transition
+                        duration-300
+                        hover:bg-[#E93CAC]
+                        hover:text-white
+                        hover:shadow-[0_20px_60px_rgba(233,60,172,0.18)]
+                    "
+                    style="transition-delay: .15s;"
+                >
+
+                    Enviar comprobante por WhatsApp
+
+                </a>
+
+                <!-- BUTTON -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="
+                            reveal
+                            inline-flex
+                            w-full
+                            items-center
+                            justify-center
+                            rounded-full
+                            bg-[#4B2E83]
+                            px-6
+                            py-5
+                            text-sm
+                            font-medium
+                            text-white
+                            transition
+                            duration-300
+                            hover:bg-[#E93CAC]
+                            hover:scale-[1.02]
+                            hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                        "
+                        style="transition-delay: .2s;"
+                    >
+
+                        Ya envié el comprobante
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+    function copyAlias() {
+
+        navigator.clipboard.writeText(
+            'alias.del.cliente'
+        )
+
+    }
+
+    function copyCVU() {
+
+        navigator.clipboard.writeText(
+            '0000003100000000000000'
+        )
+
+    }
+
+</script>
+
+{% endblock %}
