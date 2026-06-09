@@ -211,6 +211,11 @@ MERCADO_PAGO_ACCESS_TOKEN = os.getenv(
     'MERCADO_PAGO_ACCESS_TOKEN'
 )
 
+print(
+    "MP TOKEN:",
+    os.getenv("MERCADO_PAGO_ACCESS_TOKEN")
+)
+
 RESEND_API_KEY = os.getenv(
     'RESEND_API_KEY'
 )
