@@ -10,7 +10,7 @@ sdk = mercadopago.SDK(
 
 def crear_preferencia(course, request):
 
-    base_url = "https://TU-URL.ngrok-free.app"
+    base_url = "https://neuroeducacion-production.up.railway.app"
 
     preference_data = {
 
