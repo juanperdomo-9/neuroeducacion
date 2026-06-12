@@ -136,6 +136,8 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+
 STATICFILES_STORAGE = (
     'whitenoise.storage.CompressedManifestStaticFilesStorage'
 )
@@ -236,20 +238,3 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 
-# MEDIA (Cloudinary)
-
-CLOUDINARY_STORAGE = {
-    "CLOUD_NAME": "dbqpfp5oa",
-    "API_KEY": "185389264784867",
-    "API_SECRET": "VNWg9xN6MYqOPAtpfvvW3almOY4"
-}
-
-cloudinary.config(
-    cloud_name="dbqpfp5oa",
-    api_key="185389264784867",
-    api_secret="VNWg9xN6MYqOPAtpfvvW3almOY4",
-)
-
-DEFAULT_FILE_STORAGE = (
-    'cloudinary_storage.storage.MediaCloudinaryStorage'
-)
