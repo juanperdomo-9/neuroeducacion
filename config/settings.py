@@ -13,6 +13,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 import dj_database_url
+import cloudinary
 
 load_dotenv()
 
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
+    'cloudinary',
     'django.contrib.staticfiles',
     'accounts',
     'courses',
@@ -230,3 +233,19 @@ ADMIN_NOTIFICATIONS_EMAIL = os.getenv(
 CSRF_TRUSTED_ORIGINS = [
     "https://neuroeducacion-production.up.railway.app",
 ]
+
+
+# MEDIA (Cloudinary)
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": "dbqpfp5oa",
+    "API_KEY": "185389264784867",
+    "API_SECRET": "VNWg9xN6MYqOPAtpfvvW3almOY4"
+}
+
+cloudinary.config(
+    cloud_name="dbqpfp5oa",
+    api_key="185389264784867",
+    api_secret="VNWg9xN6MYqOPAtpfvvW3almOY4",
+)
+
