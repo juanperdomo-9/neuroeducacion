@@ -76,4 +76,39 @@ resend.api_key = settings.RESEND_API_KEY
 
 def enviar_mail_admin(compra):
 
-    pass
+    resend.Emails.send({
+
+        "from": "NeuroEducacion <onboarding@resend.dev>",
+
+        "to": [settings.ADMIN_NOTIFICATIONS_EMAIL],
+
+        "subject": f"Nueva compra - {compra.curso.title}",
+
+        "html": f"""
+
+        <div style="font-family:sans-serif;padding:40px;">
+
+            <h1>
+                Nueva compra recibida 🎉
+            </h1>
+
+            <hr>
+
+            <p><strong>Nombre:</strong> {compra.nombre}</p>
+
+            <p><strong>Apellido:</strong> {compra.apellido}</p>
+
+            <p><strong>Email:</strong> {compra.email}</p>
+
+            <p><strong>DNI:</strong> {compra.dni}</p>
+
+            <p><strong>Curso:</strong> {compra.curso.title}</p>
+
+            <p><strong>Método:</strong> {compra.metodo_pago}</p>
+
+            <p><strong>Estado:</strong> {compra.estado}</p>
+
+        </div>
+
+        """
+    })
