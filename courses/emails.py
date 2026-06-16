@@ -40,7 +40,36 @@ def enviar_mail_aprobado(user, course):
 
 def enviar_mail_transferencia(user, course):
 
-    pass
+    resend.Emails.send({
+
+        "from": "NeuroEducacion <onboarding@resend.dev>",
+
+        "to": [user.email],
+
+        "subject": "Estamos verificando tu pago",
+
+        "html": f"""
+
+        <div style="font-family:sans-serif;padding:40px;">
+
+            <h1 style="color:#4B2E83;">
+                Comprobante recibido 😄
+            </h1>
+
+            <p style="font-size:16px;color:#444;">
+                Recibimos tu comprobante para el curso
+                <strong>{course.title}</strong>.
+            </p>
+
+            <p style="font-size:16px;color:#444;">
+                Nuestro equipo verificará el pago y
+                activará tu acceso a la brevedad.
+            </p>
+
+        </div>
+
+        """
+    })
 
 resend.api_key = settings.RESEND_API_KEY
 
