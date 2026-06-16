@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 
 class Course(models.Model):
@@ -14,8 +15,9 @@ class Course(models.Model):
 
     short_description = models.TextField()
 
-    thumbnail = models.ImageField(
-        upload_to='courses/thumbnails/'
+    thumbnail = CloudinaryField(
+        'Thumbnail',
+        folder='courses/thumbnails/'
     )
 
     price = models.DecimalField(
@@ -35,8 +37,8 @@ class Course(models.Model):
         default=False
     )
 
-    resource_file = models.FileField(
-        upload_to='resources/',
+    resource_file = CloudinaryField(
+        'resource',
         blank=True,
         null=True
     )
