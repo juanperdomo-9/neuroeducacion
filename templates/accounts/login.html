@@ -130,6 +130,31 @@ Login
 
             </div>
 
+            <!-- ERROR LOGIN -->
+
+            {% if error_message %}
+
+            <div
+                class="
+                    mb-5
+                    rounded-2xl
+                    border
+                    border-red-200
+                    bg-red-50
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-red-600
+                "
+            >
+
+                {{ error_message }}
+
+            </div>
+
+            {% endif %}
+
             <!-- FORM -->
 
             <form

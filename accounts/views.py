@@ -52,6 +52,8 @@ def register_view(request):
 
 def login_view(request):
 
+    error_message = None
+
     if request.method == 'POST':
 
         username = request.POST.get('username')
@@ -70,9 +72,18 @@ def login_view(request):
 
             return redirect('home')
 
+        else:
+
+            error_message = (
+                'Usuario o contraseña incorrectos.'
+            )
+
     return render(
         request,
-        'accounts/login.html'
+        'accounts/login.html',
+        {
+            'error_message': error_message
+        }
     )
 
 
