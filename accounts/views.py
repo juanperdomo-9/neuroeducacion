@@ -60,6 +60,17 @@ def login_view(request):
 
         password = request.POST.get('password')
 
+        # Permite ingresar con el usuario o con el email,
+        # por si el usuario no se acuerda cuál usó.
+        if username and '@' in username:
+
+            existing_user = User.objects.filter(
+                email__iexact=username
+            ).first()
+
+            if existing_user:
+                username = existing_user.username
+
         user = authenticate(
             request,
             username=username,

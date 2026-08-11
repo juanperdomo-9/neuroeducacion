@@ -178,7 +178,7 @@ Login
                     <input
                         type="text"
                         name="username"
-                        placeholder="Usuario"
+                        placeholder="Usuario o email"
                         class="
                             h-14
                             w-full
@@ -265,6 +265,19 @@ Login
                     Ingresar
 
                 </button>
+
+                <a
+                    href="{% url 'password_reset' %}"
+                    class="
+                        block
+                        text-center
+                        text-sm
+                        text-[#6B5A8E]
+                        hover:text-[#E93CAC]
+                    "
+                >
+                    ¿Olvidaste tu contraseña?
+                </a>
 
             </form>
 

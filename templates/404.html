@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Página no encontrada
+{% endblock %}
+
+{% block content %}
+
+<section
+    class="
+        relative
+        flex
+        min-h-screen
+        items-center
+        justify-center
+        overflow-hidden
+        px-5
+        py-24
+        bg-[#FCFAFD]
+        text-center
+    "
+>
+
+    <div
+        class="
+            pointer-events-none
+            absolute
+            left-1/2
+            top-1/2
+            h-[500px]
+            w-[500px]
+            -translate-x-1/2
+            -translate-y-1/2
+            rounded-full
+            bg-[#E93CAC]/15
+            blur-3xl
+        "
+    ></div>
+
+    <div class="relative z-10 max-w-xl">
+
+        <p
+            class="
+                mb-3
+                text-xs
+                uppercase
+                tracking-[0.25em]
+                text-[#6B5A8E]
+            "
+        >
+
+            Error 404
+
+        </p>
+
+        <h1
+            class="
+                mb-6
+                text-5xl
+                font-semibold
+                tracking-[-0.05em]
+                text-[#4B2E83]
+                md:text-6xl
+            "
+        >
+
+            No encontramos esta página
+
+        </h1>
+
+        <p
+            class="
+                mb-10
+                text-sm
+                leading-relaxed
+                text-[#6B5A8E]
+            "
+        >
+
+            El enlace puede estar roto o el contenido
+            ya no está disponible.
+
+        </p>
+
+        <a
+            href="/"
+            class="
+                inline-flex
+                h-14
+                items-center
+                justify-center
+                rounded-2xl
+                bg-[#4B2E83]
+                px-8
+                text-sm
+                font-medium
+                text-white
+                transition-all
+                duration-500
+                ease-[cubic-bezier(.16,1,.3,1)]
+                hover:scale-[1.01]
+                hover:bg-[#E93CAC]
+                hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+            "
+        >
+
+            Volver al inicio
+
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

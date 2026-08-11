@@ -43,8 +43,6 @@ def crear_preferencia(course, request):
         preference_data
     )
 
-    print(preference_response)
-
     preference = preference_response["response"]
 
     return preference.get("init_point")

@@ -18,6 +18,28 @@
         {% endblock %}
     </title>
 
+    <meta
+        name="description"
+        content="{% block meta_description %}Cursos y entrenamientos de neuroeducación aplicada para transformar el aprendizaje desde una mirada humana.{% endblock %}"
+    >
+
+    <meta property="og:type" content="website">
+
+    <meta
+        property="og:title"
+        content="{% block og_title %}NeuroEducación Aplicada{% endblock %}"
+    >
+
+    <meta
+        property="og:description"
+        content="{% block og_description %}Cursos y entrenamientos de neuroeducación aplicada para transformar el aprendizaje desde una mirada humana.{% endblock %}"
+    >
+
+    <link
+        rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%234B2E83%22/><circle cx=%2250%22 cy=%2250%22 r=%2222%22 fill=%22%23E93CAC%22/></svg>"
+    >
+
     <!-- TAILWIND -->
 
     <script src="https://cdn.tailwindcss.com"></script>

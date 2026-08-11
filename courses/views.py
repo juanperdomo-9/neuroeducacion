@@ -118,7 +118,6 @@ def lesson_detail(request, id):
             )
 
         )
-    print(completed_lessons)
 
     current_progress = LessonProgress.objects.filter(
         user=request.user,
@@ -302,27 +301,14 @@ def success_view(request, slug=None):
             }
         )
 
-    payment_id = request.GET.get(
-        'payment_id'
-    )
-
-    status = request.GET.get(
-        'status'
-    )
-
-    if payment_id and status == 'approved':
-
-        enrollment, created = Enrollment.objects.get_or_create(
-            user=request.user,
-            course=course
-        )
-
-        if created:
-
-            enviar_mail_aprobado(
-                request.user,
-                course
-            )
+    # El acceso al curso NO se otorga acá: esta vista solo
+    # muestra la pantalla de "gracias" a la que Mercado Pago
+    # redirige el navegador del comprador, y los parámetros
+    # de esa redirección los controla el cliente (cualquiera
+    # podría visitar esta URL a mano con status=approved sin
+    # haber pagado). La inscripción real se crea únicamente
+    # en mp_webhook, que confirma el pago contra la propia
+    # API de Mercado Pago server-to-server.
 
     return render(
         request,

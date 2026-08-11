@@ -218,11 +218,6 @@ MERCADO_PAGO_ACCESS_TOKEN = os.getenv(
     'MERCADO_PAGO_ACCESS_TOKEN'
 )
 
-print(
-    "MP TOKEN:",
-    os.getenv("MERCADO_PAGO_ACCESS_TOKEN")
-)
-
 RESEND_API_KEY = os.getenv(
     'RESEND_API_KEY'
 )
@@ -244,4 +239,37 @@ cloudinary.config(
     secure=True,
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'accounts.email_backend.ResendEmailBackend'
+
+# Se usa una variable propia de Railway (no DEBUG) para activar
+# el endurecimiento HTTPS: en este proyecto el .env local trae
+# DEBUG=False, y si atáramos el redirect a HTTPS a ese valor,
+# correr el server en local (sin TLS) entraría en un loop de
+# redirects. RAILWAY_ENVIRONMENT_NAME sólo existe cuando el
+# proceso corre en la infraestructura de Railway.
+RUNNING_ON_RAILWAY = bool(
+    os.getenv('RAILWAY_ENVIRONMENT_NAME')
+)
+
+# Endurecimiento para producción. Railway termina el TLS y
+# reenvía por HTTP interno con el header X-Forwarded-Proto,
+# por eso hace falta SECURE_PROXY_SSL_HEADER para que Django
+# sepa que la conexión original ya venía por HTTPS.
+if RUNNING_ON_RAILWAY:
+
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+
+    CSRF_COOKIE_SECURE = True
+
+    SECURE_HSTS_SECONDS = 31536000
+
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_HSTS_PRELOAD = True
