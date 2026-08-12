@@ -226,7 +226,7 @@ Checkout
                         "
                     >
 
-                        {{ course.description }}
+                        {{ course.short_description }}
 
                     </p>
 
@@ -319,6 +319,31 @@ Checkout
                     </div>
 
                 </div>
+
+                <!-- ERROR -->
+
+                {% if error_message %}
+
+                <div
+                    class="
+                        mb-5
+                        rounded-2xl
+                        border
+                        border-red-200
+                        bg-red-50
+                        px-5
+                        py-4
+                        text-sm
+                        font-medium
+                        text-red-600
+                    "
+                >
+
+                    {{ error_message }}
+
+                </div>
+
+                {% endif %}
 
                 <!-- FORM -->
 
@@ -439,6 +464,9 @@ Checkout
                             type="text"
                             name="dni"
                             required
+                            inputmode="numeric"
+                            pattern="[0-9]{7,8}"
+                            title="Ingresá tu DNI sin puntos (7 u 8 números)"
                             class="
                                 h-14
                                 w-full

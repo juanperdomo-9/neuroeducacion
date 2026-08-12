@@ -226,8 +226,14 @@ ADMIN_NOTIFICATIONS_EMAIL = os.getenv(
     'ADMIN_NOTIFICATIONS_EMAIL'
 )
 
+# Lista separada por comas en la env var CSRF_TRUSTED_ORIGINS,
+# por ejemplo: "https://neuroeducacion.onrender.com,https://miapp.com"
+# Así no queda pisado a un dominio fijo cada vez que cambia de
+# hosting (Railway -> Render -> lo que sea).
 CSRF_TRUSTED_ORIGINS = [
-    "https://neuroeducacion-production.up.railway.app",
+    origin.strip()
+    for origin in os.getenv('CSRF_TRUSTED_ORIGINS', '').split(',')
+    if origin.strip()
 ]
 
 
@@ -244,21 +250,25 @@ if DEBUG:
 else:
     EMAIL_BACKEND = 'accounts.email_backend.ResendEmailBackend'
 
-# Se usa una variable propia de Railway (no DEBUG) para activar
-# el endurecimiento HTTPS: en este proyecto el .env local trae
-# DEBUG=False, y si atáramos el redirect a HTTPS a ese valor,
-# correr el server en local (sin TLS) entraría en un loop de
-# redirects. RAILWAY_ENVIRONMENT_NAME sólo existe cuando el
-# proceso corre en la infraestructura de Railway.
-RUNNING_ON_RAILWAY = bool(
-    os.getenv('RAILWAY_ENVIRONMENT_NAME')
+# No se usa DEBUG para esto: en este proyecto el .env local
+# trae DEBUG=False, y si atáramos el redirect a HTTPS a ese
+# valor, correr el server en local (sin TLS) entraría en un
+# loop de redirects. En cambio, se detecta automáticamente si
+# se está corriendo en un hosting real (Railway o Render ponen
+# sus propias env vars), o se puede forzar a mano con
+# IS_PRODUCTION=True para cualquier otro proveedor.
+RUNNING_IN_PRODUCTION = (
+    os.getenv('IS_PRODUCTION') == 'True'
+    or bool(os.getenv('RAILWAY_ENVIRONMENT_NAME'))
+    or bool(os.getenv('RENDER'))
 )
 
-# Endurecimiento para producción. Railway termina el TLS y
-# reenvía por HTTP interno con el header X-Forwarded-Proto,
-# por eso hace falta SECURE_PROXY_SSL_HEADER para que Django
-# sepa que la conexión original ya venía por HTTPS.
-if RUNNING_ON_RAILWAY:
+# Endurecimiento para producción. Railway y Render terminan el
+# TLS y reenvían por HTTP interno con el header
+# X-Forwarded-Proto, por eso hace falta SECURE_PROXY_SSL_HEADER
+# para que Django sepa que la conexión original ya venía por
+# HTTPS.
+if RUNNING_IN_PRODUCTION:
 
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 

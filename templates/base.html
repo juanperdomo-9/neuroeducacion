@@ -526,11 +526,40 @@ body {
 
         </p>
 
-        <p>
+        <div
+            class="
+                flex
+                gap-6
+            "
+        >
 
-            Plataforma educativa premium.
+            <a
+                href="{% url 'terminos' %}"
+                class="
+                    transition-colors
+                    duration-300
+                    hover:text-[#E93CAC]
+                "
+            >
 
-        </p>
+                Términos y condiciones
+
+            </a>
+
+            <a
+                href="{% url 'privacidad' %}"
+                class="
+                    transition-colors
+                    duration-300
+                    hover:text-[#E93CAC]
+                "
+            >
+
+                Privacidad
+
+            </a>
+
+        </div>
 
     </div>
 

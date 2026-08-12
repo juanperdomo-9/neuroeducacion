@@ -9,6 +9,7 @@ from .models import (
     Lesson,
     Enrollment,
     Compra,
+    Testimonio,
 )
 
 class LessonInline(admin.StackedInline):
@@ -48,7 +49,7 @@ class CourseAdmin(admin.ModelAdmin):
 
     search_fields = (
         'title',
-        'description',
+        'short_description',
     )
 
     list_filter = (
@@ -155,6 +156,27 @@ class EnrollmentAdmin(admin.ModelAdmin):
     search_fields = (
         'user__username',
         'course__title',
+    )
+
+
+@admin.register(Testimonio)
+class TestimonioAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'nombre',
+        'rol',
+        'activo',
+        'orden',
+    )
+
+    list_editable = (
+        'activo',
+        'orden',
+    )
+
+    search_fields = (
+        'nombre',
+        'texto',
     )
 
 

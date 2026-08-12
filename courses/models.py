@@ -165,6 +165,51 @@ class LessonProgress(models.Model):
 
         return f'{self.user} - {self.lesson}'
     
+class Testimonio(models.Model):
+
+    class Meta:
+        verbose_name = 'Testimonio'
+        verbose_name_plural = 'Testimonios'
+        ordering = ['orden', '-id']
+
+    nombre = models.CharField(
+        max_length=255
+    )
+
+    rol = models.CharField(
+        'Rol o curso realizado',
+        max_length=255,
+        blank=True
+    )
+
+    texto = models.TextField(
+        'Testimonio'
+    )
+
+    foto = CloudinaryField(
+        'Foto',
+        folder='testimonios/',
+        blank=True,
+        null=True
+    )
+
+    activo = models.BooleanField(
+        'Publicado',
+        default=True
+    )
+
+    orden = models.PositiveIntegerField(
+        default=0
+    )
+
+    creado_en = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return self.nombre
+
+
 class Compra(models.Model):
 
     METODOS_PAGO = (

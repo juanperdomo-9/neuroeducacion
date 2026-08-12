@@ -409,32 +409,43 @@
 
                         {% if has_access %}
 
-                            <a
-                                href="{% url 'lesson_detail' modules.first.lessons.first.id %}"
-                                class="
-                                    inline-flex
-                                    items-center
-                                    justify-center
-                                    rounded-full
-                                    bg-[#4B2E83]
-                                    px-7
-                                    py-4
-                                    text-sm
-                                    font-medium
-                                    text-white
-                                    transition-all
-                                    duration-500
-                                    ease-[cubic-bezier(.16,1,.3,1)]
-                                    hover:scale-[1.02]
-                                    hover:bg-[#E93CAC]
-                                    hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
-                                    active:scale-[0.98]
-                                "
-                            >
+                            {% if modules.first.lessons.first %}
 
-                                Ver contenido
+                                <a
+                                    href="{% url 'lesson_detail' modules.first.lessons.first.id %}"
+                                    class="
+                                        inline-flex
+                                        items-center
+                                        justify-center
+                                        rounded-full
+                                        bg-[#4B2E83]
+                                        px-7
+                                        py-4
+                                        text-sm
+                                        font-medium
+                                        text-white
+                                        transition-all
+                                        duration-500
+                                        ease-[cubic-bezier(.16,1,.3,1)]
+                                        hover:scale-[1.02]
+                                        hover:bg-[#E93CAC]
+                                        hover:shadow-[0_20px_60px_rgba(233,60,172,0.22)]
+                                        active:scale-[0.98]
+                                    "
+                                >
 
-                            </a>
+                                    Ver contenido
+
+                                </a>
+
+                            {% else %}
+
+                                <p class="text-sm text-[#6B5A8E]">
+                                    Ya tenés acceso. El contenido
+                                    se está preparando.
+                                </p>
+
+                            {% endif %}
 
                         {% else %}
 

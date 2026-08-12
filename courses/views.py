@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from .models import Course, Module, Lesson, Enrollment, LessonProgress, Compra
+from .models import Course, Module, Lesson, Enrollment, LessonProgress, Compra, Testimonio
 from .utils import user_has_access
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -36,12 +36,17 @@ def home(request):
             title__icontains=query
         )
 
+    testimonios = Testimonio.objects.filter(
+        activo=True
+    )
+
     return render(
         request,
         'pages/home.html',
         {
             'courses': courses,
-            'query': query
+            'query': query,
+            'testimonios': testimonios,
         }
     )
 
@@ -169,10 +174,13 @@ def checkout_view(request, slug):
         slug=slug
     )
 
-    mp_url = crear_preferencia(
-        course,
-        request
-    )
+    # Si ya tiene el curso, no tiene sentido pagarlo de nuevo.
+    if user_has_access(request.user, course):
+
+        return redirect(
+            'course_detail',
+            slug=course.slug
+        )
 
     if request.method == 'POST':
 
@@ -202,6 +210,30 @@ def checkout_view(request, slug):
 
         elif metodo_pago == 'mercadopago':
 
+            # La preferencia de MP se crea recién acá (al
+            # confirmar), no en cada visita a esta página:
+            # antes se generaba una preferencia nueva en MP
+            # por cada GET, aunque nunca se usaba.
+            mp_url = crear_preferencia(
+                course,
+                request
+            )
+
+            if not mp_url:
+
+                return render(
+                    request,
+                    'pages/checkout.html',
+                    {
+                        'course': course,
+                        'error_message': (
+                            'No pudimos conectar con Mercado Pago. '
+                            'Probá de nuevo en unos minutos o elegí '
+                            'transferencia bancaria.'
+                        ),
+                    }
+                )
+
             return redirect(
                 mp_url
             )
@@ -211,7 +243,6 @@ def checkout_view(request, slug):
         'pages/checkout.html',
         {
             'course': course,
-            'mp_url': mp_url,
         }
     )
 

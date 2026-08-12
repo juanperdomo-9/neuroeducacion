@@ -563,12 +563,6 @@ Home
 
                 </a>
 
-            {% endfor %}
-
-            {% for course in courses %}
-
-                <!-- CARD -->
-
             {% empty %}
 
                 <div
@@ -577,16 +571,11 @@ Home
                         overflow-hidden
                         rounded-[32px]
                         border
-                        border-white/10
-                        bg-white/[0.03]
+                        border-[#4B2E83]/10
+                        bg-white
                         px-8
                         py-16
                         text-center
-                        hover:-translate-y-3
-                        hover:scale-[1.015]
-                        transition-all
-                        duration-700
-                        ease-[cubic-bezier(.16,1,.3,1)]
                     "
                 >
 
@@ -601,8 +590,8 @@ Home
                             justify-center
                             rounded-full
                             border
-                            border-white/10
-                            bg-white/[0.03]
+                            border-[#4B2E83]/10
+                            bg-[#FCFAFD]
                         "
                     >
 
@@ -615,7 +604,7 @@ Home
                             mb-3
                             text-2xl
                             font-semibold
-                            text-[#4B2E83]+pí90
+                            text-[#4B2E83]
                         "
                     >
 
@@ -627,7 +616,7 @@ Home
                         class="
                             mx-auto
                             max-w-md
-                            text-zinc-400
+                            text-[#6B5A8E]
                         "
                     >
 
@@ -645,6 +634,195 @@ Home
     </div>
 
 </section>
+
+<!-- TESTIMONIOS -->
+<!--
+    Esta sección solo se renderiza si hay Testimonio.activo=True
+    cargados desde el admin (Cursos > Testimonios). No hay
+    testimonios de ejemplo hardcodeados a propósito: mostrar
+    reseñas inventadas como si fueran de alumnos reales sería
+    engañoso.
+-->
+
+{% if testimonios %}
+
+<section
+    class="
+        bg-white
+        px-5
+        py-24
+        md:px-8
+        md:py-32
+    "
+>
+
+    <div
+        class="
+            mx-auto
+            max-w-7xl
+        "
+    >
+
+        <div class="mb-16 text-center md:mb-20">
+
+            <p
+                class="
+                    mb-3
+                    text-xs
+                    uppercase
+                    tracking-[0.25em]
+                    text-[#6B5A8E]
+                    md:text-sm
+                "
+            >
+
+                Testimonios
+
+            </p>
+
+            <h2
+                class="
+                    mx-auto
+                    max-w-2xl
+                    text-4xl
+                    font-semibold
+                    tracking-[-0.04em]
+                    text-[#4B2E83]
+                    md:text-6xl
+                "
+            >
+
+                Lo que dicen
+                nuestros alumnos.
+
+            </h2>
+
+        </div>
+
+        <div
+            class="
+                grid
+                grid-cols-1
+                gap-8
+                md:grid-cols-2
+                lg:grid-cols-3
+                lg:gap-10
+            "
+        >
+
+            {% for testimonio in testimonios %}
+
+                <div
+                    class="
+                        rounded-[28px]
+                        border
+                        border-[#4B2E83]/10
+                        bg-[#FCFAFD]
+                        p-7
+                    "
+                >
+
+                    <p
+                        class="
+                            mb-6
+                            text-[15px]
+                            leading-relaxed
+                            text-[#4B2E83]
+                        "
+                    >
+
+                        “{{ testimonio.texto }}”
+
+                    </p>
+
+                    <div
+                        class="
+                            flex
+                            items-center
+                            gap-3
+                        "
+                    >
+
+                        {% if testimonio.foto %}
+
+                            <img
+                                src="{{ testimonio.foto.url }}"
+                                alt="{{ testimonio.nombre }}"
+                                class="
+                                    h-11
+                                    w-11
+                                    rounded-full
+                                    object-cover
+                                "
+                            >
+
+                        {% else %}
+
+                            <div
+                                class="
+                                    flex
+                                    h-11
+                                    w-11
+                                    items-center
+                                    justify-center
+                                    rounded-full
+                                    bg-[#4B2E83]/10
+                                    text-sm
+                                    font-semibold
+                                    text-[#4B2E83]
+                                "
+                            >
+
+                                {{ testimonio.nombre|first|upper }}
+
+                            </div>
+
+                        {% endif %}
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-sm
+                                    font-medium
+                                    text-[#4B2E83]
+                                "
+                            >
+
+                                {{ testimonio.nombre }}
+
+                            </p>
+
+                            {% if testimonio.rol %}
+
+                                <p
+                                    class="
+                                        text-xs
+                                        text-[#6B5A8E]
+                                    "
+                                >
+
+                                    {{ testimonio.rol }}
+
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endif %}
 
 <!-- ANIMATIONS -->
 

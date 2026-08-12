@@ -39,10 +39,16 @@ def crear_preferencia(course, request):
 
     }
 
-    preference_response = sdk.preference().create(
-        preference_data
-    )
+    try:
 
-    preference = preference_response["response"]
+        preference_response = sdk.preference().create(
+            preference_data
+        )
 
-    return preference.get("init_point")
+        preference = preference_response["response"]
+
+        return preference.get("init_point")
+
+    except Exception:
+
+        return None
