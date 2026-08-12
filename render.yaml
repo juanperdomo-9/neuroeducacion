@@ -26,6 +26,8 @@ services:
           property: connectionString
       - key: CSRF_TRUSTED_ORIGINS
         sync: false
+      - key: SITE_URL
+        sync: false
       - key: MERCADO_PAGO_ACCESS_TOKEN
         sync: false
       - key: RESEND_API_KEY

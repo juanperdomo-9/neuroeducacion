@@ -1,3 +1,5 @@
+import os
+
 import mercadopago
 
 from django.conf import settings
@@ -10,7 +12,16 @@ sdk = mercadopago.SDK(
 
 def crear_preferencia(course, request):
 
-    base_url = "https://neuroeducacion-production.up.railway.app"
+    # SITE_URL se define por variable de entorno (la URL pública
+    # real del deploy activo). Sin esto, el webhook y los
+    # back_urls de Mercado Pago apuntarían a un dominio que puede
+    # no existir más (ya pasó una vez con Railway). En local cae
+    # a la URL de la propia request, aunque ahí MP igual no va a
+    # poder pegarle al webhook por no ser pública.
+    base_url = os.getenv(
+        'SITE_URL',
+        request.build_absolute_uri('/').rstrip('/')
+    )
 
     preference_data = {
 
