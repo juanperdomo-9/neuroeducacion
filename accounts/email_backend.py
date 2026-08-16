@@ -1,7 +1,11 @@
+import logging
+
 from django.conf import settings
 from django.core.mail.backends.base import BaseEmailBackend
 
 import resend
+
+logger = logging.getLogger(__name__)
 
 
 class ResendEmailBackend(BaseEmailBackend):
@@ -43,7 +47,15 @@ class ResendEmailBackend(BaseEmailBackend):
 
             except Exception:
 
-                if not self.fail_silently:
-                    raise
+                # Nunca se propaga: el flujo de "recuperar
+                # contraseña" siempre debe mostrar la pantalla
+                # de "revisá tu email" (no revelar si el envío
+                # falló, ni romper la vista), aunque Resend
+                # esté en modo sandbox o falle por otro motivo.
+                logger.exception(
+                    "Falló el envío de email a %s (asunto: %s)",
+                    payload.get("to"),
+                    payload.get("subject"),
+                )
 
         return sent_count

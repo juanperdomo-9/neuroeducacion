@@ -1,12 +1,38 @@
+import logging
+
 from django.conf import settings
 import resend
 
 resend.api_key = settings.RESEND_API_KEY
 
+logger = logging.getLogger(__name__)
+
+
+def _enviar(payload):
+    """
+    Envoltorio para resend.Emails.send: un mail que falla (cuenta
+    de Resend en modo sandbox, rate limit, corte de red, etc.)
+    nunca debe tirar abajo una compra que ya se guardó en la
+    base. Se loguea el error para poder diagnosticarlo, pero no
+    se propaga.
+    """
+
+    try:
+
+        resend.Emails.send(payload)
+
+    except Exception:
+
+        logger.exception(
+            "Falló el envío de email a %s (asunto: %s)",
+            payload.get("to"),
+            payload.get("subject"),
+        )
+
 
 def enviar_mail_aprobado(user, course):
 
-    resend.Emails.send({
+    _enviar({
 
         "from": "NeuroEducacion <onboarding@resend.dev>",
 
@@ -40,7 +66,7 @@ def enviar_mail_aprobado(user, course):
 
 def enviar_mail_transferencia(user, course):
 
-    resend.Emails.send({
+    _enviar({
 
         "from": "NeuroEducacion <onboarding@resend.dev>",
 
@@ -71,12 +97,10 @@ def enviar_mail_transferencia(user, course):
         """
     })
 
-resend.api_key = settings.RESEND_API_KEY
-
 
 def enviar_mail_admin(compra):
 
-    resend.Emails.send({
+    _enviar({
 
         "from": "NeuroEducacion <onboarding@resend.dev>",
 

@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.test import Client, TestCase
 from django.urls import reverse
 
-from .models import Course, Enrollment
+from .models import Course, Enrollment, Compra
 from .utils import user_has_access
 
 
@@ -178,6 +178,63 @@ class MpWebhookTests(TestCase):
             Enrollment.objects.filter(
                 user=self.user,
                 course=self.course
+            ).exists()
+        )
+
+
+class TransferenciaViewTests(TestCase):
+    """
+    Regresión: si el envío del email (Resend) falla -por ejemplo
+    porque la cuenta está en modo sandbox y no puede mandarle a
+    cualquier destinatario- la compra por transferencia no debe
+    tirar 500. El comprobante ya se guardó en la base y eso es
+    lo que importa; el mail es un extra.
+    """
+
+    def setUp(self):
+
+        self.user = User.objects.create_user(
+            username='transfer',
+            email='transfer@example.com',
+            password='Pass12345!'
+        )
+
+        self.course = make_course(slug='curso-transferencia')
+
+        self.client = Client()
+
+        self.client.login(
+            username='transfer',
+            password='Pass12345!'
+        )
+
+        session = self.client.session
+
+        session['checkout_data'] = {
+            'course_id': self.course.id,
+            'nombre': 'Juan',
+            'apellido': 'Perez',
+            'dni': '12345678',
+            'email': 'transfer@example.com',
+        }
+
+        session.save()
+
+    @patch(
+        'courses.emails.resend.Emails.send',
+        side_effect=Exception('Resend en modo sandbox')
+    )
+    def test_falla_de_email_no_rompe_la_compra(self, mock_send):
+
+        response = self.client.post('/transferencia/', {})
+
+        self.assertEqual(response.status_code, 302)
+
+        self.assertTrue(
+            Compra.objects.filter(
+                usuario=self.user,
+                curso=self.course,
+                metodo_pago='transferencia'
             ).exists()
         )
 
