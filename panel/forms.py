@@ -66,6 +66,16 @@ class CourseForm(StyledFormMixin, forms.ModelForm):
             'title', 'slug', 'short_description', 'thumbnail',
             'resource_file', 'price', 'is_free', 'is_published',
         ]
+        labels = {
+            'title': 'Título',
+            'slug': 'Slug (URL)',
+            'short_description': 'Descripción corta',
+            'thumbnail': 'Imagen de portada',
+            'resource_file': 'Archivo descargable (opcional)',
+            'price': 'Precio',
+            'is_free': 'Es gratuito',
+            'is_published': 'Publicado',
+        }
 
 
 class ModuleForm(StyledFormMixin, forms.ModelForm):
@@ -73,6 +83,10 @@ class ModuleForm(StyledFormMixin, forms.ModelForm):
     class Meta:
         model = Module
         fields = ['title', 'order']
+        labels = {
+            'title': 'Título del módulo',
+            'order': 'Orden',
+        }
 
 
 class LessonForm(StyledFormMixin, forms.ModelForm):
@@ -83,6 +97,14 @@ class LessonForm(StyledFormMixin, forms.ModelForm):
             'title', 'video_url', 'duration', 'content',
             'order', 'is_preview',
         ]
+        labels = {
+            'title': 'Título de la lección',
+            'video_url': 'URL del video',
+            'duration': 'Duración',
+            'content': 'Contenido / notas',
+            'order': 'Orden',
+            'is_preview': 'Vista previa gratuita',
+        }
 
 
 class EnrollmentForm(StyledFormMixin, forms.ModelForm):
@@ -90,3 +112,8 @@ class EnrollmentForm(StyledFormMixin, forms.ModelForm):
     class Meta:
         model = Enrollment
         fields = ['user', 'course', 'paid']
+        labels = {
+            'user': 'Usuario',
+            'course': 'Curso',
+            'paid': 'Acceso pago (activo)',
+        }
