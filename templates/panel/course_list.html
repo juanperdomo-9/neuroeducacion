@@ -1,0 +1,37 @@
+{% extends 'panel/base.html' %}
+
+{% block title %}Cursos{% endblock %}
+{% block page_title %}Cursos{% endblock %}
+{% block page_actions %}
+<a href="{% url 'panel:course_create' %}" class="rounded-full px-5 py-2.5 text-sm font-bold text-white" style="background: linear-gradient(135deg, #4B2E83, #E93CAC);">+ Nuevo curso</a>
+{% endblock %}
+
+{% block panel_content %}
+
+<div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    {% for course in courses %}
+        <a href="{% url 'panel:course_detail' course.pk %}" class="panel-card block overflow-hidden transition hover:border-[#E93CAC]/30">
+            <div class="aspect-video overflow-hidden bg-white/5">
+                {% if course.thumbnail %}
+                    <img src="{{ course.thumbnail.url }}" class="h-full w-full object-cover">
+                {% endif %}
+            </div>
+            <div class="p-5">
+                <div class="mb-2 flex items-center gap-2">
+                    <span class="rounded-full px-2.5 py-1 text-[10px] font-bold {% if course.is_published %}bg-emerald-500/15 text-emerald-300{% else %}bg-white/10 text-white/40{% endif %}">
+                        {% if course.is_published %}Publicado{% else %}Borrador{% endif %}
+                    </span>
+                    {% if course.is_free %}
+                        <span class="rounded-full bg-[#E93CAC]/15 px-2.5 py-1 text-[10px] font-bold text-[#E93CAC]">Gratis</span>
+                    {% endif %}
+                </div>
+                <p class="font-bold">{{ course.title }}</p>
+                <p class="mt-1 text-xs text-white/40">${{ course.price }} · {{ course.modules.count }} módulos</p>
+            </div>
+        </a>
+    {% empty %}
+        <p class="text-sm text-white/40">Todavía no hay cursos cargados.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

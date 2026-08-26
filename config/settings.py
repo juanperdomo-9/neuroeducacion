@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'dashboard',
+    'panel',
     'payments',
     'portfolio',
 ]

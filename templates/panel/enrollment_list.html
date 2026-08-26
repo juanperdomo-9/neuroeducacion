@@ -1,0 +1,52 @@
+{% extends 'panel/base.html' %}
+
+{% block title %}Inscripciones{% endblock %}
+{% block page_title %}Inscripciones{% endblock %}
+{% block page_actions %}
+<a href="{% url 'panel:enrollment_create' %}" class="rounded-full px-5 py-2.5 text-sm font-bold text-white" style="background: linear-gradient(135deg, #4B2E83, #E93CAC);">+ Otorgar acceso</a>
+{% endblock %}
+
+{% block panel_content %}
+
+<div class="panel-card overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead>
+                <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
+                    <th class="px-5 py-4">Usuario</th>
+                    <th class="px-5 py-4">Curso</th>
+                    <th class="px-5 py-4">Pagado</th>
+                    <th class="px-5 py-4">Desde</th>
+                    <th class="px-5 py-4"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for e in enrollments %}
+                    <tr class="border-b border-white/5">
+                        <td class="px-5 py-4">
+                            <p class="font-semibold">{{ e.user.username }}</p>
+                            <p class="text-xs text-white/40">{{ e.user.email }}</p>
+                        </td>
+                        <td class="px-5 py-4">{{ e.course.title }}</td>
+                        <td class="px-5 py-4">
+                            <span class="rounded-full px-3 py-1 text-xs font-bold {% if e.paid %}bg-emerald-500/15 text-emerald-300{% else %}bg-white/10 text-white/40{% endif %}">
+                                {% if e.paid %}Sí{% else %}No{% endif %}
+                            </span>
+                        </td>
+                        <td class="px-5 py-4 text-white/50">{{ e.created_at|date:"d/m/Y" }}</td>
+                        <td class="px-5 py-4">
+                            <form method="post" action="{% url 'panel:enrollment_delete' e.pk %}" onsubmit="return confirm('¿Revocar el acceso de {{ e.user.username }} a {{ e.course.title }}?');">
+                                {% csrf_token %}
+                                <button class="text-xs font-bold text-rose-300 hover:underline">Revocar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="px-5 py-10 text-center text-white/40">No hay inscripciones todavía.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

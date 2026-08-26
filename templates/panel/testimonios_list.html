@@ -1,0 +1,78 @@
+{% extends 'panel/base.html' %}
+
+{% block title %}Testimonios{% endblock %}
+{% block page_title %}Testimonios{% endblock %}
+
+{% block panel_content %}
+
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr]">
+
+    <div class="panel-card overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm">
+                <thead>
+                    <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
+                        <th class="px-5 py-4">Nombre</th>
+                        <th class="px-5 py-4">Texto</th>
+                        <th class="px-5 py-4">Publicado</th>
+                        <th class="px-5 py-4"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in testimonios %}
+                        <tr class="border-b border-white/5">
+                            <td class="px-5 py-4">
+                                <p class="font-semibold">{{ t.nombre }}</p>
+                                <p class="text-xs text-white/40">{{ t.rol }}</p>
+                            </td>
+                            <td class="max-w-xs px-5 py-4 text-white/60">{{ t.texto|truncatechars:80 }}</td>
+                            <td class="px-5 py-4">
+                                <form method="post" action="{% url 'panel:testimonio_toggle' t.pk %}">
+                                    {% csrf_token %}
+                                    <button class="rounded-full px-3 py-1.5 text-xs font-bold
+                                        {% if t.activo %}bg-emerald-500/15 text-emerald-300{% else %}bg-white/10 text-white/40{% endif %}">
+                                        {% if t.activo %}Sí{% else %}No{% endif %}
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="px-5 py-4">
+                                <form method="post" action="{% url 'panel:testimonio_delete' t.pk %}" onsubmit="return confirm('¿Eliminar este testimonio?');">
+                                    {% csrf_token %}
+                                    <button class="text-xs font-bold text-rose-300 hover:underline">Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% empty %}
+                        <tr><td colspan="4" class="px-5 py-10 text-center text-white/40">Todavía no hay testimonios cargados.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="panel-card p-6">
+        <h2 class="mb-5 text-lg font-bold">Agregar testimonio</h2>
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <div>
+                <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-white/50">Nombre</label>
+                <input type="text" name="nombre" required class="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white outline-none focus:border-[#E93CAC]/40 focus:ring-2 focus:ring-[#E93CAC]/20">
+            </div>
+            <div>
+                <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-white/50">Rol / curso (opcional)</label>
+                <input type="text" name="rol" class="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-sm text-white outline-none focus:border-[#E93CAC]/40 focus:ring-2 focus:ring-[#E93CAC]/20">
+            </div>
+            <div>
+                <label class="mb-1.5 block text-xs font-bold uppercase tracking-wider text-white/50">Testimonio</label>
+                <textarea name="texto" required rows="4" class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none focus:border-[#E93CAC]/40 focus:ring-2 focus:ring-[#E93CAC]/20"></textarea>
+            </div>
+            <button type="submit" class="w-full rounded-full px-6 py-3 text-sm font-bold text-white" style="background: linear-gradient(135deg, #4B2E83, #E93CAC);">
+                Agregar
+            </button>
+            <p class="text-xs text-white/30">La foto (opcional) se puede cargar desde el admin completo de Django.</p>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

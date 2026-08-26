@@ -226,6 +226,8 @@ class Compra(models.Model):
 
         ('aprobado', 'Aprobado'),
 
+        ('rechazado', 'Rechazado'),
+
     )
 
     curso = models.ForeignKey(

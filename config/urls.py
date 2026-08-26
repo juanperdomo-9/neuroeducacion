@@ -17,6 +17,7 @@ def robots_txt(request):
         "Allow: /",
         "Disallow: /admin/",
         "Disallow: /dashboard/",
+        "Disallow: /panel/",
         "Disallow: /checkout/",
         "Disallow: /accounts/",
     ]
@@ -42,6 +43,11 @@ urlpatterns = [
     path(
         'dashboard/',
         include('dashboard.urls')
+    ),
+
+    path(
+        'panel/',
+        include('panel.urls')
     ),
 
     path(

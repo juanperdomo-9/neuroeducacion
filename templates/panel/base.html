@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>{% block title %}Panel{% endblock %} · NeuroEducación</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%234B2E83%22/><circle cx=%2250%22 cy=%2250%22 r=%2222%22 fill=%22%23E93CAC%22/></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #150F22; }
+    </style>
+</head>
+<body class="min-h-screen bg-[#150F22] font-sans text-white antialiased">
+
+{% with url_name=request.resolver_match.url_name %}
+<div class="flex min-h-screen">
+
+    <!-- SIDEBAR -->
+    <aside id="panelSidebar" class="fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full flex-col border-r border-white/10 bg-black/20 backdrop-blur-xl transition-transform duration-300 lg:translate-x-0">
+
+        <div class="flex items-center gap-3 border-b border-white/10 px-6 py-6">
+            <span class="flex h-10 w-10 items-center justify-center rounded-2xl text-lg font-black" style="background: linear-gradient(135deg, #4B2E83, #E93CAC);">NE</span>
+            <div>
+                <p class="text-sm font-extrabold leading-tight">NeuroEducación</p>
+                <p class="text-xs font-medium text-white/40">Panel de gestión</p>
+            </div>
+        </div>
+
+        <nav class="flex-1 space-y-1 overflow-y-auto px-4 py-6">
+
+            <a href="{% url 'panel:overview' %}" class="panel-nav-link {% if url_name == 'overview' %}panel-nav-link--active{% endif %}">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>
+                Resumen
+            </a>
+
+            <a href="{% url 'panel:compras_list' %}" class="panel-nav-link {% if 'compra' in url_name %}panel-nav-link--active{% endif %}">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                Compras
+            </a>
+
+            <a href="{% url 'panel:course_list' %}" class="panel-nav-link {% if 'course' in url_name or 'module' in url_name or 'lesson' in url_name %}panel-nav-link--active{% endif %}">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></svg>
+                Cursos
+            </a>
+
+            <a href="{% url 'panel:enrollment_list' %}" class="panel-nav-link {% if 'enrollment' in url_name %}panel-nav-link--active{% endif %}">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Inscripciones
+            </a>
+
+            <a href="{% url 'panel:testimonios_list' %}" class="panel-nav-link {% if 'testimonio' in url_name %}panel-nav-link--active{% endif %}">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Testimonios
+            </a>
+
+        </nav>
+
+        <div class="border-t border-white/10 p-4">
+            <a href="/admin/" target="_blank" rel="noopener" class="panel-nav-link">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06A2 2 0 1 1 7.04 4.3l.06.06A1.65 1.65 0 0 0 8.9 4.7a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+                Admin completo (Django)
+            </a>
+            <a href="{% url 'home' %}" target="_blank" rel="noopener" class="panel-nav-link">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+                Ver el sitio
+            </a>
+            <div class="mt-3 flex items-center justify-between rounded-2xl bg-white/5 px-4 py-3">
+                <div class="min-w-0">
+                    <p class="truncate text-xs font-bold text-white">{{ request.user.get_full_name|default:request.user.username }}</p>
+                    <p class="text-[11px] text-white/40">Staff</p>
+                </div>
+                <form method="post" action="{% url 'panel:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="flex h-8 w-8 items-center justify-center rounded-full text-white/50 transition hover:bg-white/10 hover:text-white" title="Cerrar sesión">
+                        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </aside>
+
+    <div id="panelOverlay" class="fixed inset-0 z-30 hidden bg-black/50 lg:hidden"></div>
+
+    <!-- CONTENIDO -->
+    <div class="flex min-h-screen flex-1 flex-col lg:ml-72">
+
+        <header class="sticky top-0 z-20 flex items-center gap-4 border-b border-white/10 bg-[#150F22]/80 px-5 py-4 backdrop-blur-xl sm:px-8">
+            <button id="panelSidebarToggle" class="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 text-white lg:hidden">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+            </button>
+            <div class="min-w-0 flex-1">
+                <h1 class="truncate text-xl font-extrabold sm:text-2xl">{% block page_title %}Panel{% endblock %}</h1>
+                {% block page_subtitle %}{% endblock %}
+            </div>
+            {% block page_actions %}{% endblock %}
+        </header>
+
+        <main class="flex-1 px-5 py-6 sm:px-8 sm:py-8">
+            {% if messages %}
+            <div class="mb-6 space-y-2">
+                {% for message in messages %}
+                <div class="rounded-2xl border px-4 py-3 text-sm font-semibold
+                    {% if message.tags == 'error' %}border-rose-500/30 bg-rose-500/10 text-rose-300
+                    {% else %}border-emerald-500/30 bg-emerald-500/10 text-emerald-200{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% block panel_content %}{% endblock %}
+        </main>
+    </div>
+</div>
+{% endwith %}
+
+<style>
+.panel-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    transition: all .2s ease;
+}
+.panel-nav-link:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+}
+.panel-nav-link--active {
+    background: rgba(233,60,172,0.12);
+    color: #fff;
+    box-shadow: inset 0 0 0 1px rgba(233,60,172,0.25);
+}
+.panel-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.75rem;
+}
+</style>
+
+<script>
+(function () {
+    var sidebar = document.getElementById('panelSidebar');
+    var overlay = document.getElementById('panelOverlay');
+    var toggle = document.getElementById('panelSidebarToggle');
+
+    function openSidebar() {
+        sidebar.classList.remove('-translate-x-full');
+        overlay.classList.remove('hidden');
+    }
+
+    function closeSidebar() {
+        sidebar.classList.add('-translate-x-full');
+        overlay.classList.add('hidden');
+    }
+
+    if (toggle) {
+        toggle.addEventListener('click', function () {
+            if (sidebar.classList.contains('-translate-x-full')) {
+                openSidebar();
+            } else {
+                closeSidebar();
+            }
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+    }
+})();
+</script>
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>

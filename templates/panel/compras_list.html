@@ -1,0 +1,92 @@
+{% extends 'panel/base.html' %}
+
+{% block title %}Compras{% endblock %}
+{% block page_title %}Compras{% endblock %}
+
+{% block panel_content %}
+
+<div class="mb-6 flex flex-wrap gap-2">
+    <a href="?estado=pendiente" class="panel-tab {% if estado_actual == 'pendiente' %}panel-tab--active{% endif %}">Pendientes</a>
+    <a href="?estado=aprobado" class="panel-tab {% if estado_actual == 'aprobado' %}panel-tab--active{% endif %}">Aprobadas</a>
+    <a href="?estado=rechazado" class="panel-tab {% if estado_actual == 'rechazado' %}panel-tab--active{% endif %}">Rechazadas</a>
+    <a href="?estado=todas" class="panel-tab {% if estado_actual == 'todas' %}panel-tab--active{% endif %}">Todas</a>
+</div>
+
+<style>
+.panel-tab {
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.05);
+    transition: all .2s ease;
+}
+.panel-tab:hover { color: rgba(255,255,255,0.7); }
+.panel-tab--active {
+    color: #fff;
+    background: linear-gradient(135deg, #4B2E83, #E93CAC);
+}
+</style>
+
+<div class="panel-card overflow-hidden">
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead>
+                <tr class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
+                    <th class="px-5 py-4">Comprador</th>
+                    <th class="px-5 py-4">Curso</th>
+                    <th class="px-5 py-4">Método</th>
+                    <th class="px-5 py-4">DNI</th>
+                    <th class="px-5 py-4">Fecha</th>
+                    <th class="px-5 py-4">Estado</th>
+                    <th class="px-5 py-4"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compra in compras %}
+                    <tr class="border-b border-white/5">
+                        <td class="px-5 py-4">
+                            <p class="font-semibold">{{ compra.nombre }} {{ compra.apellido }}</p>
+                            <p class="text-xs text-white/40">{{ compra.email }}</p>
+                        </td>
+                        <td class="px-5 py-4">{{ compra.curso.title }}</td>
+                        <td class="px-5 py-4">{{ compra.get_metodo_pago_display }}</td>
+                        <td class="px-5 py-4">{{ compra.dni }}</td>
+                        <td class="px-5 py-4 text-white/50">{{ compra.creado|date:"d/m/Y H:i" }}</td>
+                        <td class="px-5 py-4">
+                            <span class="rounded-full px-3 py-1 text-xs font-bold
+                                {% if compra.estado == 'aprobado' %}bg-emerald-500/15 text-emerald-300
+                                {% elif compra.estado == 'rechazado' %}bg-rose-500/15 text-rose-300
+                                {% else %}bg-amber-500/15 text-amber-300{% endif %}">
+                                {{ compra.get_estado_display }}
+                            </span>
+                        </td>
+                        <td class="px-5 py-4">
+                            {% if compra.estado == 'pendiente' %}
+                                <div class="flex gap-2">
+                                    <form method="post" action="{% url 'panel:compra_aprobar' compra.pk %}">
+                                        {% csrf_token %}
+                                        <button class="rounded-full bg-emerald-500/15 px-3 py-1.5 text-xs font-bold text-emerald-300 hover:bg-emerald-500/25">Aprobar</button>
+                                    </form>
+                                    <form method="post" action="{% url 'panel:compra_rechazar' compra.pk %}">
+                                        {% csrf_token %}
+                                        <button class="rounded-full bg-rose-500/15 px-3 py-1.5 text-xs font-bold text-rose-300 hover:bg-rose-500/25">Rechazar</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7" class="px-5 py-10 text-center text-white/40">No hay compras acá.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
