@@ -3,7 +3,7 @@ services:
     name: neuroeducacion
     runtime: python
     plan: free
-    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py ensure_superuser"
     startCommand: "gunicorn config.wsgi:application"
     envVars:
       - key: PYTHON_VERSION
@@ -34,4 +34,14 @@ services:
       - key: CLOUDINARY_API_SECRET
         sync: false
       - key: ADMIN_NOTIFICATIONS_EMAIL
+        sync: false
+      # Solo hacen falta para crear el primer superuser (ver
+      # ensure_superuser). Una vez que lo creaste, podés borrar
+      # DJANGO_SUPERUSER_PASSWORD de las env vars de Render si
+      # no querés dejarla cargada.
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
         sync: false
