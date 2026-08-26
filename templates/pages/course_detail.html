@@ -258,7 +258,7 @@
                 </div>
 
             </div>
-            {% if course.is_free and course.resource_file %}
+            {% if can_download_resource %}
 
                 <div
                     class="
@@ -371,7 +371,7 @@
 
                 {% if course.is_free %}
 
-                    {% if course.resource_file %}
+                    {% if can_download_resource %}
 
                         <a
                             href="{{ course.resource_file.url }}"
@@ -444,6 +444,37 @@
                                     Ya tenés acceso. El contenido
                                     se está preparando.
                                 </p>
+
+                            {% endif %}
+
+                            {% if can_download_resource %}
+
+                                <a
+                                    href="{{ course.resource_file.url }}"
+                                    download
+                                    class="
+                                        inline-flex
+                                        items-center
+                                        justify-center
+                                        rounded-full
+                                        border
+                                        border-[#4B2E83]/10
+                                        bg-white
+                                        px-7
+                                        py-4
+                                        text-sm
+                                        font-medium
+                                        text-[#4B2E83]
+                                        transition-all
+                                        duration-300
+                                        hover:border-[#E93CAC]/20
+                                        hover:text-[#E93CAC]
+                                    "
+                                >
+
+                                    Descargar recurso
+
+                                </a>
 
                             {% endif %}
 

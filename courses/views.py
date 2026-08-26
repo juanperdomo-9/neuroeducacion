@@ -70,6 +70,14 @@ def course_detail(request, slug):
         course
     )
 
+    # El recurso descargable se puede bajar si el curso es
+    # gratis, o si es pago y el usuario ya tiene acceso (antes
+    # el template solo lo mostraba para cursos gratis, dejando
+    # a los alumnos que pagaron sin forma de bajarlo).
+    can_download_resource = bool(
+        course.resource_file
+    ) and (course.is_free or has_access)
+
     return render(
         request,
         'pages/course_detail.html',
@@ -78,6 +86,7 @@ def course_detail(request, slug):
             'modules': modules,
             'lessons_count': lessons_count,
             'has_access': has_access,
+            'can_download_resource': can_download_resource,
         }
     )
 
