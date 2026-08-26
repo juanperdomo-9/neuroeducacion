@@ -1,9 +1,3 @@
-databases:
-  - name: neuroeducacion-db
-    plan: free
-    databaseName: neuroeducacion
-    user: neuroeducacion
-
 services:
   - type: web
     name: neuroeducacion
@@ -20,10 +14,11 @@ services:
         value: "False"
       - key: SECRET_KEY
         generateValue: true
+      # Connection string de Neon (Dashboard de Neon -> Connection
+      # Details -> "Pooled connection" recomendado para Render).
+      # Ya viene con ?sslmode=require, no hay que tocarlo.
       - key: DATABASE_URL
-        fromDatabase:
-          name: neuroeducacion-db
-          property: connectionString
+        sync: false
       - key: CSRF_TRUSTED_ORIGINS
         sync: false
       - key: SITE_URL

@@ -92,7 +92,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        # Neon (y la mayoría de los Postgres administrados) exigen
+        # SSL. Solo se pide cuando hay un DATABASE_URL real: si se
+        # fuerza siempre, rompe el fallback a sqlite en local
+        # (sqlite3 no acepta el kwarg "sslmode").
+        ssl_require=bool(os.getenv('DATABASE_URL')),
     )
 }
 
