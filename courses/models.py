@@ -81,8 +81,6 @@ class Lesson(models.Model):
 
     title = models.CharField(max_length=255)
 
-    video_url = models.URLField()
-
     duration = models.CharField(
         max_length=50,
         blank=True
@@ -94,6 +92,14 @@ class Lesson(models.Model):
     )
 
     content = models.TextField(
+        blank=True,
+        null=True
+    )
+
+    attachment = CloudinaryField(
+        'Archivo de la clase',
+        folder='lessons/attachments/',
+        resource_type='raw',
         blank=True,
         null=True
     )

@@ -273,6 +273,39 @@
 
                     </div>
 
+                    {% if lesson.attachment %}
+
+                        <a
+                            href="{{ lesson.attachment.url }}"
+                            download
+                            target="_blank"
+                            class="
+                                mt-8
+                                inline-flex
+                                items-center
+                                gap-3
+                                rounded-2xl
+                                border
+                                border-[#4B2E83]/10
+                                bg-[#FCFAFD]
+                                px-6
+                                py-4
+                                text-sm
+                                font-medium
+                                text-[#4B2E83]
+                                transition-all
+                                duration-300
+                                hover:border-[#E93CAC]/20
+                                hover:text-[#E93CAC]
+                            "
+                        >
+
+                            📎 Descargar archivo de la clase
+
+                        </a>
+
+                    {% endif %}
+
                 </div>
 
             </div>

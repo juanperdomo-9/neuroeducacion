@@ -95,13 +95,14 @@ class LessonForm(StyledFormMixin, forms.ModelForm):
         model = Lesson
         fields = [
             'title', 'video_url', 'duration', 'content',
-            'order', 'is_preview',
+            'attachment', 'order', 'is_preview',
         ]
         labels = {
             'title': 'Título de la lección',
             'video_url': 'URL del video',
             'duration': 'Duración',
             'content': 'Contenido / notas',
+            'attachment': 'Archivo de la clase (PDF, ejercicios, etc.)',
             'order': 'Orden',
             'is_preview': 'Vista previa gratuita',
         }
